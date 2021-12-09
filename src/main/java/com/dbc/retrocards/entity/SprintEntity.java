@@ -7,10 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity(name = "SPRINT")
+//@Getter
+//@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Entity(name = "SPRINT")
 public class SprintEntity {
 }

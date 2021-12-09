@@ -2,8 +2,8 @@ package com.dbc.retrocards.dto;
 
 import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class SprintCreateDTO {
 }
