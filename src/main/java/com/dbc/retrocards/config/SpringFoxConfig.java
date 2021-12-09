@@ -23,36 +23,37 @@ import java.util.List;
 public class SpringFoxConfig {
 
     @Bean
-    public Docket api() {
+    public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
-//                .securityContexts(Collections.singletonList(securityContext()))
-//                .securitySchemes(Collections.singletonList(apiKey()))
+                .securityContexts(Collections.singletonList(securityContext()))
+                .securitySchemes(Collections.singletonList(apiKey()))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.dbc.retrocards"))
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false)
                 .apiInfo(new ApiInfoBuilder()
-                        .title("Pessoa REST API")
-                        .description("Exemplo de app com Spring Boot")
+                        .title("API REST DE HOTEIS")
+                        .description("API REST DE HOTEIS")
                         .version("1.0.0")
-                        .license("Apache License Version 2.0")
+                        .license("Apache Licence Version 2.0")
                         .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
-                        .contact(new Contact("Marcelo", "https://www.dbccompany.com.br", "marcelo.cainelli@dbccompany.com.br"))
-                        .build());
+                        .contact(new Contact("Matheus", "https://www.dbccompany.com.br/", "matheus.camilo@dbccompany.com.br"))
+                        .build()
+                );
     }
-//    private ApiKey apiKey() {
-//        return new ApiKey("JWT", "Authorization", "header");
-//    }
-//
-//    private SecurityContext securityContext() {
-//        return SecurityContext.builder().securityReferences(defaultAuth()).build();
-//    }
-//
-//    private List<SecurityReference> defaultAuth() {
-//        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-//        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-//        authorizationScopes[0] = authorizationScope;
-//        return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
-//    }
+    private ApiKey apiKey() {
+        return new ApiKey("JWT", "Authorization", "header");
+    }
+
+    private SecurityContext securityContext() {
+        return SecurityContext.builder().securityReferences(defaultAuth()).build();
+    }
+
+    private List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
+    }
 }
