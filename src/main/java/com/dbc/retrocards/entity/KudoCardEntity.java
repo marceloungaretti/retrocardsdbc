@@ -22,6 +22,7 @@ public class KudoCardEntity {
     @Column(name = "id_kudocard")
     private Integer idKudoCard;
 
+
     @Column(name = "titulo")
     private String titulo;
 

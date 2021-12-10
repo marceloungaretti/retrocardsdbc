@@ -23,6 +23,7 @@ public class KudoBoxEntity {
     @Column(name = "id_kudobox")
     private Integer idKudoBox;
 
+
     @Column(name = "titulo")
     private String titulo;
 
@@ -33,6 +34,6 @@ public class KudoBoxEntity {
     private StatusKudoBox status;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "kudobox", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "kudoBox", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<KudoCardEntity> kudocards;
 }
