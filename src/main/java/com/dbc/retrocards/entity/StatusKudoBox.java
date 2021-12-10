@@ -4,5 +4,5 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum StatusKudoBox {
-    CRIADO, EM_ANDAMENTO
+    EM_ANDAMENTO, ENCERRADO
 }
