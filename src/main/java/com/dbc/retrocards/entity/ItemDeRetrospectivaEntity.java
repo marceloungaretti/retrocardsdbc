@@ -21,7 +21,7 @@ public class ItemDeRetrospectivaEntity {
     @Column(name = "id_item")
     private Integer idItemRetrospectiva;
 
-    @Column(name = "tipo")
+    @Column(name = "TIPO")
     private String tipo;
 
     @Column(name = "titulo")

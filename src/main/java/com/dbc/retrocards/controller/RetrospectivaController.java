@@ -66,7 +66,7 @@ public class RetrospectivaController {
 
 
 
-    @ApiOperation(value = "Deleta um Kudo Card pelo sey ID")
+    @ApiOperation(value = "Deleta uma Retrospectiva  pelo sey ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retrospectiva  deletada com sucesso"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),

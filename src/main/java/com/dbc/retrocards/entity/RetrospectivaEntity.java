@@ -23,7 +23,7 @@ public class RetrospectivaEntity {
     @Column(name = "id_retrospectiva")
     private Integer idRetrospectiva;
 
-    @Column(name = "id_titulo")
+    @Column(name = "titulo")
     private  Integer idTitulo;
 
     @Column(name = "status")
