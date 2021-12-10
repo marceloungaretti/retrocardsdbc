@@ -6,12 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Retrospectiva")
+@Entity(name = "retrospectiva")
 public class RetrospectivaEntity {
 
     @Id
@@ -21,7 +22,8 @@ public class RetrospectivaEntity {
     private  Integer idTitulo;
     @Column(name = "status")
     private TipoStatus tipoStatus;
-    @Column(name = "DESCRICAO")
+    @Column(name = "descricao")
     private  String descricao;
-
+    @Column(name = "data")
+    private LocalDateTime dataReuniao;
 }

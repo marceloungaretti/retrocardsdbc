@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Data
 public class RetrospectivaCreateDTO {
 
-    @NotEmpty
     private  int idTitulo;
     @ApiModelProperty(value = "Data de criação do reunião")
     private LocalDateTime dataReuniao;

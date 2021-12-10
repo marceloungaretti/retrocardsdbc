@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Retrospectiva")
+@RequestMapping("/retrospectiva")
 @Validated
 @RequiredArgsConstructor
 @Slf4j
@@ -68,7 +68,7 @@ public class RetrospectivaController {
 
     @ApiOperation(value = "Deleta um Kudo Card pelo sey ID")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna o Kudo Card deletado com sucesso"),
+            @ApiResponse(code = 200, message = "Retrospectiva  deletada com sucesso"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada um exceção")
     })
