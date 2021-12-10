@@ -50,7 +50,7 @@ public class KudoCardController {
 
     @ApiOperation(value = "Retorna um Kudo Card pelo seu ID")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna o Kudo Card sucesso"),
+            @ApiResponse(code = 200, message = "Retorna o Kudo Card com sucesso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
     @GetMapping("/{idKudoCard}")

@@ -24,7 +24,7 @@ public class ItemDeRetrospectivaService {
         return entity;
     }
 
-    private ItemDeRetrospectivaDTO create(ItemDeRetrospectivaCreateDTO dto) throws Exception {
+    public ItemDeRetrospectivaDTO create(ItemDeRetrospectivaCreateDTO dto) throws Exception {
         ItemDeRetrospectivaEntity entity = objectMapper.convertValue(dto, ItemDeRetrospectivaEntity.class);
         ItemDeRetrospectivaEntity itemCriado = itemDeRetrospectivaRepository.save(entity);
         ItemDeRetrospectivaDTO itemDeRetrospectivaDTO = objectMapper.convertValue(itemCriado, ItemDeRetrospectivaDTO.class);
