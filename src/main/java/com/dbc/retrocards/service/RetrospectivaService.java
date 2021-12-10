@@ -1,9 +1,7 @@
 package com.dbc.retrocards.service;
 
-import com.dbc.retrocards.dto.KudoCardDTO;
 import com.dbc.retrocards.dto.RetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
-import com.dbc.retrocards.entity.KudoCardEntity;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
 import com.dbc.retrocards.entity.TipoStatus;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
@@ -13,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 

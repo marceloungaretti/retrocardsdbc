@@ -23,7 +23,6 @@ public class KudoBoxEntity {
     @Column(name = "id_kudobox")
     private Integer idKudoBox;
 
-
     @Column(name = "titulo")
     private String titulo;
 
