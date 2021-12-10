@@ -33,12 +33,12 @@ public class SpringFoxConfig {
                 .build()
                 .useDefaultResponseMessages(false)
                 .apiInfo(new ApiInfoBuilder()
-                        .title("API REST DE HOTEIS")
-                        .description("API REST DE HOTEIS")
+                        .title("RETROCARDSDBC")
+                        .description("API REST DE RETROCARDS")
                         .version("1.0.0")
                         .license("Apache Licence Version 2.0")
                         .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
-                        .contact(new Contact("Matheus", "https://www.dbccompany.com.br/", "matheus.camilo@dbccompany.com.br"))
+                        .contact(new Contact("RetrocardsDBC", "https://www.dbccompany.com.br/", "matheus.camilo@dbccompany.com.br"))
                         .build()
                 );
     }

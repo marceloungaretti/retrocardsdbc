@@ -41,7 +41,7 @@ public class TokenService {
                 .collect(Collectors.toList());
 
         String jwtToken = Jwts.builder()
-                .setIssuer("pessoa-api")
+                .setIssuer("retrocards-dbc")
                 .claim(CLAIN_PERMISSOES, permissoes)
                 .setSubject(usuario.getIdUsuario().toString())
                 .setIssuedAt(generateDate)
