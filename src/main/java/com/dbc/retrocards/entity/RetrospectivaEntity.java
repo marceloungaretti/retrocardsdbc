@@ -20,9 +20,9 @@ public class RetrospectivaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RETROSPECTIVA_SEQ")
     @SequenceGenerator(name = "RETROSPECTIVA_SEQ", sequenceName = "SEQ_RETROSPECTIVA", allocationSize = 1)
-
     @Column(name = "id_retrospectiva")
     private Integer idRetrospectiva;
+
     @Column(name = "id_titulo")
     private  Integer idTitulo;
 
@@ -36,7 +36,7 @@ public class RetrospectivaEntity {
     private LocalDateTime dataReuniao;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "retrospectiva", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "retrospectivaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemDeRetrospectivaEntity> itens;
 
 }
