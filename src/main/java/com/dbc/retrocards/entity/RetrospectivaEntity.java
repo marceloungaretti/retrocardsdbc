@@ -1,5 +1,6 @@
 package com.dbc.retrocards.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,12 +25,18 @@ public class RetrospectivaEntity {
     private Integer idRetrospectiva;
     @Column(name = "id_titulo")
     private  Integer idTitulo;
+
     @Column(name = "status")
     private TipoStatus tipoStatus;
+
     @Column(name = "descricao")
     private  String descricao;
+
     @Column(name = "data")
     private LocalDateTime dataReuniao;
-    @Column(name = "itens")
-    private Integer itensApontados;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "retrospectiva", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemDeRetrospectiva> itens;
+
 }
