@@ -48,9 +48,9 @@ public class RetrospectivaController {
         return retrospectivaService.list();
     }
 
-    @GetMapping("/{idTitulo}")
-    public RetrospectivaEntity getById(@RequestParam("idTitulo") Integer idTitulo) throws Exception {
-        return retrospectivaService.findById(idTitulo);
+    @GetMapping("/{idRetrospectiva}")
+    public RetrospectivaEntity getById(@RequestParam("idTitulo") Integer idRetrospectiva) throws Exception {
+        return retrospectivaService.findById(idRetrospectiva);
     }
 
     @ApiOperation(value = "Atualiza umA Retrospectiva pelo seu ID")
@@ -58,8 +58,8 @@ public class RetrospectivaController {
             @ApiResponse(code = 200, message = "Retorna retrospectiva atualizado com sucesso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
-    @PutMapping("/{idTitulo}")
-    public RetrospectivaDTO update(@PathVariable("idTitulo") Integer id,
+    @PutMapping("/{idRetrospectiva}")
+    public RetrospectivaDTO update(@PathVariable("idRetrospectiva") Integer id,
                                    @RequestBody @Valid RetrospectivaCreateDTO retroCreateDTO) throws Exception {
         return retrospectivaService.update(id, retroCreateDTO);
     }
@@ -73,7 +73,7 @@ public class RetrospectivaController {
             @ApiResponse(code = 500, message = "Foi gerada um exceção")
     })
     @DeleteMapping("/{idTitulo}")
-    public void delete(@PathVariable("idTitulo") Integer id) throws Exception {
+    public void delete(@PathVariable("idRetrospectiva") Integer id) throws Exception {
         retrospectivaService.delete(id);
     }
 

@@ -18,6 +18,9 @@ public class RetrospectivaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RETROSPECTIVA_SEQ")
     @SequenceGenerator(name = "RETROSPECTIVA_SEQ", sequenceName = "SEQ_RETROSPECTIVA", allocationSize = 1)
+
+    @Column(name = "id_retrospectiva")
+    private Integer idRetrospectiva;
     @Column(name = "id_titulo")
     private  Integer idTitulo;
     @Column(name = "status")
@@ -26,4 +29,6 @@ public class RetrospectivaEntity {
     private  String descricao;
     @Column(name = "data")
     private LocalDateTime dataReuniao;
+    @Column(name = "itens")
+    private Integer itensApontados;
 }
