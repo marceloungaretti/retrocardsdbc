@@ -2,7 +2,6 @@ package com.dbc.retrocards.controller;
 
 import com.dbc.retrocards.dto.KudoCardCreateDTO;
 import com.dbc.retrocards.dto.KudoCardDTO;
-import com.dbc.retrocards.repository.KudoCardRepository;
 import com.dbc.retrocards.service.KudoCardService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -23,7 +22,6 @@ import java.util.List;
 public class KudoCardController {
 
     private final KudoCardService kudoCardService;
-    private final KudoCardRepository kudoCardRepository;
 
     @ApiOperation(value = "Cria um novo Kudo Card")
     @ApiResponses(value = {
@@ -60,6 +58,7 @@ public class KudoCardController {
         return kudoCardService.getById(idKudoCard);
     }
 
+
     @ApiOperation(value = "Atualiza um Kudo Card pelo seu ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna o Kudo Card atualizado com sucesso"),
@@ -70,6 +69,7 @@ public class KudoCardController {
                               @RequestBody @Valid KudoCardCreateDTO kudoCardCreateDTO) throws Exception {
         return kudoCardService.update(idKudoCard, kudoCardCreateDTO);
     }
+
 
     @ApiOperation(value = "Deleta um Kudo Card pelo sey ID")
     @ApiResponses(value = {
