@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -31,8 +32,8 @@ public class RetrospectivaService {
     }
 
 
-    public RetrospectivaEntity findById(Integer id) throws RegraDeNegocioException {
-        RetrospectivaEntity entity = repository.findById(id)
+    public RetrospectivaEntity findById(Integer idRetrospectiva) throws RegraDeNegocioException {
+        RetrospectivaEntity entity = repository.findById(idRetrospectiva)
                 .orElseThrow(() -> new RegraDeNegocioException("Titulo não encontrado não encontrado."));
         return entity;
     }
@@ -44,9 +45,12 @@ public class RetrospectivaService {
                 .collect(Collectors.toList());
     }
 
-    public RetrospectivaDTO getById(Integer id) throws RegraDeNegocioException {
-        RetrospectivaEntity entity = findById(id);
+    public RetrospectivaDTO getById(Integer idRetrospectiva) throws RegraDeNegocioException {
+        RetrospectivaEntity entity = findById(idRetrospectiva);
         RetrospectivaDTO dto = objectMapper.convertValue(entity, RetrospectivaDTO.class);
+        if(dto.getTipoStatus() == TipoStatus.FINALIZADA){
+            throw new RegraDeNegocioException("Retrospectiva não encontrada");
+        }
         return dto;
     }
 
@@ -60,13 +64,9 @@ public class RetrospectivaService {
     }
 
 
-    public void delete(Integer idTitulo) throws RegraDeNegocioException {
-        RetrospectivaEntity Entity = repository.findById(idTitulo).orElseThrow(() -> new RegraDeNegocioException("Totulo de Retrispectiva  não encontrado!"));
-
-        Entity.setTipoStatus(TipoStatus.ANDAMENTO);
-
-        repository.save(Entity);
-
+    public void delete(Integer idRetrospectiva) throws RegraDeNegocioException {
+       RetrospectivaEntity entity = findById(idRetrospectiva);
+        repository.delete(entity);
 
     }
 }

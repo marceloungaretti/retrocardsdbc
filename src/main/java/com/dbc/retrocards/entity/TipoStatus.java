@@ -8,7 +8,7 @@ public enum TipoStatus {
 
 
     CRIADA(1),
-    ANDAMENTO(2);
+    FINALIZADA(2);
 
     private int tipo;
 

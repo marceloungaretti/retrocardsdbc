@@ -11,10 +11,14 @@ import java.time.LocalDateTime;
 @Data
 public class RetrospectivaCreateDTO {
 
-    private  int idTitulo;
+
+    private  Integer idretrospectiva;
+
+    private  int titulo;
     @ApiModelProperty(value = "Data de criação do reunião")
-    private LocalDateTime dataReuniao;
+    private LocalDateTime dataQueOcorreu;
     @ApiModelProperty(value = "1 - CRIADO   2 - ANDAMENTO")
     private TipoStatus tipoStatus;
     private String descricao;
+    private Integer itensApontados;
 }
