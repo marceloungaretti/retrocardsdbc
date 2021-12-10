@@ -18,8 +18,8 @@ import java.util.List;
 public class KudoBoxEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "KUDOBOX_SEQ")
-    @SequenceGenerator(name = "KUDOBOX_SEQ", sequenceName = "seq_kudobox", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "KUDOBOX_SEQUENCIA")
+    @SequenceGenerator(name = "KUDOBOX_SEQUENCIA", sequenceName = "SEQ_KUDOBOX", allocationSize = 1)
     @Column(name = "id_kudobox")
     private Integer idKudoBox;
 
@@ -30,7 +30,7 @@ public class KudoBoxEntity {
     private LocalDate dataLeitura;
 
     @Column(name = "status")
-    private StatusKudoBox status;
+    private StatusKudoBoxEntity statusKudoBoxEntity;
 
     @JsonIgnore
     @OneToMany(mappedBy = "kudoBox", cascade = CascadeType.ALL, orphanRemoval = true)

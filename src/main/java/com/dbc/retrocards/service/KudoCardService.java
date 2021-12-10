@@ -3,7 +3,7 @@ package com.dbc.retrocards.service;
 import com.dbc.retrocards.dto.KudoCardCreateDTO;
 import com.dbc.retrocards.dto.KudoCardDTO;
 import com.dbc.retrocards.entity.KudoCardEntity;
-import com.dbc.retrocards.entity.StatusKudoBox;
+import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.KudoCardRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,7 +56,7 @@ public class KudoCardService {
 
     public void delete(Integer id) throws RegraDeNegocioException {
         KudoCardEntity entity = findById(id);
-        if (entity.getKudoBox().getStatus() == StatusKudoBox.EM_ANDAMENTO) {
+        if (entity.getKudoBox().getStatusKudoBoxEntity() == StatusKudoBoxEntity.EM_ANDAMENTO) {
             kudoCardRepository.delete(entity);
         }
     }

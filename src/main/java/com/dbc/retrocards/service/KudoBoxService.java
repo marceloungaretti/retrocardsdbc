@@ -3,7 +3,6 @@ package com.dbc.retrocards.service;
 import com.dbc.retrocards.dto.KudoBoxCreateDTO;
 import com.dbc.retrocards.dto.KudoBoxDTO;
 import com.dbc.retrocards.entity.KudoBoxEntity;
-import com.dbc.retrocards.entity.StatusKudoBox;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.KudoBoxRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,7 +26,6 @@ public class KudoBoxService {
 
     public KudoBoxDTO create(KudoBoxCreateDTO kudoBoxCreateDTO) throws Exception {
         KudoBoxEntity entity = objectMapper.convertValue(kudoBoxCreateDTO, KudoBoxEntity.class);
-        entity.setStatus(StatusKudoBox.EM_ANDAMENTO);
         KudoBoxEntity kudoBoxCriado = kudoBoxRepository.save(entity);
         KudoBoxDTO kudoBoxDTO = objectMapper.convertValue(kudoBoxCriado, KudoBoxDTO.class);
         return kudoBoxDTO;
