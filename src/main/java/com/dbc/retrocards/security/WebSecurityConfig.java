@@ -34,11 +34,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/").permitAll()
                 .antMatchers("/auth").permitAll()
-                .antMatchers(HttpMethod.GET, "/usuario/{idUsuario}", "/quartos/**", "/hoteis/**").hasRole("USUARIO")
-                .antMatchers(HttpMethod.POST, "/usuario/**", "/reserva/**").hasRole("USUARIO")
-                .antMatchers(HttpMethod.PUT, "/usuario/**", "/reserva/**").hasRole("USUARIO")
-                .antMatchers(HttpMethod.DELETE, "/usuario/**", "/reserva/**").hasRole("USUARIO")
-                .antMatchers("/**").hasRole("ADMIN") //ROLE_ADMIN
+                .antMatchers("/sprint").permitAll()
+                .antMatchers("/sprint/listar-sprint").permitAll()
+//                .antMatchers(HttpMethod.GET, "/usuario/{idUsuario}", "/quartos/**", "/hoteis/**").hasRole("USUARIO")
+//                .antMatchers(HttpMethod.POST, "/usuario/**", "/reserva/**").hasRole("USUARIO")
+//                .antMatchers(HttpMethod.PUT, "/usuario/**", "/reserva/**").hasRole("USUARIO")
+//                .antMatchers(HttpMethod.DELETE, "/usuario/**", "/reserva/**").hasRole("USUARIO")
+//                .antMatchers("/**").hasRole("ADMIN") //ROLE_ADMIN
                 .anyRequest().authenticated()
 
                 //filtro de autenticação...
