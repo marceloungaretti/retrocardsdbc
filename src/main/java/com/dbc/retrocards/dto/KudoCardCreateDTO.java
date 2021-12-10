@@ -1,5 +1,6 @@
 package com.dbc.retrocards.dto;
 
+import com.dbc.retrocards.entity.KudoBoxEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -30,4 +31,7 @@ public class KudoCardCreateDTO {
     @NotNull
     @ApiModelProperty(value = "Usuário que recebeu")
     private String para;
+
+    @ApiModelProperty(value = "KudoBox")
+    private KudoBoxEntity kudoBox;
 }

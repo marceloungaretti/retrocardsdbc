@@ -1,5 +1,6 @@
 package com.dbc.retrocards.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,4 +36,9 @@ public class KudoCardEntity {
 
     @Column(name = "para")
     private String para;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_kudobox", referencedColumnName = "id_kudobox")
+    private KudoBoxEntity kudoBox;
 }

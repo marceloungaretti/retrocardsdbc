@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class KudoCardDTO extends KudoCardCreateDTO{
+
     @ApiModelProperty(value = "ID do KudoCard")
     private Integer id;
 }
