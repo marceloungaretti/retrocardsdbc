@@ -20,7 +20,4 @@ public class KudoBoxCreateDTO {
     @NotNull
     @ApiModelProperty(value = "Data de leitura dos KudoCards(encerramento dos cadastros)")
     private LocalDate dataLeitura;
-
-    @ApiModelProperty(value = "Kudo Cards")
-    private List<KudoCardDTO> kudoCards;
 }
