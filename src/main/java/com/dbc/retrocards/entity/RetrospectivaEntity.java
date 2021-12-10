@@ -37,6 +37,6 @@ public class RetrospectivaEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "retrospectiva", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemDeRetrospectiva> itens;
+    private List<ItemDeRetrospectivaEntity> itens;
 
 }
