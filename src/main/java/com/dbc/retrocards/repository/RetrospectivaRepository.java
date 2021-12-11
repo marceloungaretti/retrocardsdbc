@@ -8,10 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
  public  interface RetrospectivaRepository extends JpaRepository<RetrospectivaEntity, Integer> {
-
+ @Query(value = "SELECT * from retrospectiva WHERE id_sprint = :id", nativeQuery = true)
+ List<RetrospectivaEntity> findByIdSprint(Integer id);
 
 }

@@ -70,4 +70,17 @@ public class RetrospectivaService {
         repository.delete(entity);
 
     }
+
+
+    public List<RetrospectivaDTO> getByIdSprint(Integer id) throws RegraDeNegocioException {
+        return repository.findByIdSprint(id).stream()
+                .map(retrospectivaEntity -> {
+                    RetrospectivaDTO retrospectivaDTO = objectMapper.convertValue(retrospectivaEntity, RetrospectivaDTO.class);
+
+                    retrospectivaDTO.setSprintDTO(objectMapper.convertValue(retrospectivaEntity.getSprintEntity(), SprintDTO.class));
+                    return retrospectivaDTO;
+
+                })
+                .collect(Collectors.toList());
+    }
 }

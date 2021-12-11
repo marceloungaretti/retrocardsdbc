@@ -4,6 +4,7 @@ package com.dbc.retrocards.controller;
 import com.dbc.retrocards.dto.RetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
+import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.service.RetrospectivaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -76,7 +77,10 @@ public class RetrospectivaController {
     public void delete(@PathVariable("idRetrospectiva") Integer id) throws Exception {
         retrospectivaService.delete(id);
     }
-
+    @GetMapping("/id-sprint")
+    public List<RetrospectivaDTO> listByIdSrint(@Valid @RequestParam("idSprint") Integer id) throws RegraDeNegocioException {
+        return retrospectivaService.getByIdSprint(id);
+    }
     }
 
 
