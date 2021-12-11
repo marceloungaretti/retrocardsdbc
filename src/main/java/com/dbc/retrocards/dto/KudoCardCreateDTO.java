@@ -32,6 +32,4 @@ public class KudoCardCreateDTO {
     @ApiModelProperty(value = "Usuário que recebeu")
     private String para;
 
-    @ApiModelProperty(value = "KudoBox")
-    private KudoBoxEntity kudoBox;
 }

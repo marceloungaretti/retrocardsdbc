@@ -1,10 +1,12 @@
 package com.dbc.retrocards.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,4 +23,8 @@ public class SprintEntity {
     private LocalDate dataInicio;
     @Column(name = "data_conclusao")
     private LocalDate dataConclusao;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "sprintEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RetrospectivaEntity> retrospectivaEntityList;
 }

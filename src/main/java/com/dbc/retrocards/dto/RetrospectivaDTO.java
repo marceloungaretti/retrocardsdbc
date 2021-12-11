@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 public class RetrospectivaDTO extends RetrospectivaCreateDTO {
     @ApiModelProperty(value = "ID DO TITULO")
-    private Integer id;
+    private Integer idRetrospectiva;
+    private SprintDTO sprintDTO;
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -24,7 +24,7 @@ public class RetrospectivaEntity {
     private Integer idRetrospectiva;
 
     @Column(name = "titulo")
-    private  Integer idTitulo;
+    private  String idTitulo;
 
     @Column(name = "status")
     private TipoStatus tipoStatus;
@@ -33,10 +33,15 @@ public class RetrospectivaEntity {
     private  String descricao;
 
     @Column(name = "data")
-    private LocalDateTime dataReuniao;
+    private LocalDate dataReuniao;
 
     @JsonIgnore
     @OneToMany(mappedBy = "retrospectivaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemDeRetrospectivaEntity> itens;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_sprint", referencedColumnName = "id_sprint")
+    private SprintEntity sprintEntity;
 
 }

@@ -2,10 +2,12 @@ package com.dbc.retrocards.service;
 
 import com.dbc.retrocards.dto.RetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
+import com.dbc.retrocards.dto.SprintDTO;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
 import com.dbc.retrocards.entity.TipoStatus;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.RetrospectivaRepository;
+import com.dbc.retrocards.repository.SprintRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,12 +21,14 @@ import java.util.stream.Collectors;
 public class RetrospectivaService {
     private final ObjectMapper objectMapper;
     private final RetrospectivaRepository repository;
+    private final SprintRepository sprintRepository;
 
-    public RetrospectivaCreateDTO create(RetrospectivaCreateDTO retrospectivaCreateDTO) throws Exception {
-
-        RetrospectivaEntity retroCriada = objectMapper.convertValue(retrospectivaCreateDTO, RetrospectivaEntity.class);
-        repository.save(retroCriada);
-        RetrospectivaCreateDTO retroDTO = objectMapper.convertValue(retroCriada, RetrospectivaCreateDTO.class);
+    public RetrospectivaDTO create(Integer id, RetrospectivaCreateDTO retrospectivaCreateDTO) throws RegraDeNegocioException {
+        RetrospectivaEntity entity = objectMapper.convertValue(retrospectivaCreateDTO, RetrospectivaEntity.class);
+        entity.setSprintEntity(sprintRepository.findById(id).orElseThrow(() -> new RegraDeNegocioException("Sprint não encontrada")));
+        RetrospectivaEntity retrospectivaCriar = repository.save(entity);
+        RetrospectivaDTO retroDTO = objectMapper.convertValue(retrospectivaCriar, RetrospectivaDTO.class);
+        retroDTO.setSprintDTO(objectMapper.convertValue(retrospectivaCriar.getSprintEntity(), SprintDTO.class));
         return retroDTO;
     }
 
@@ -35,10 +39,10 @@ public class RetrospectivaService {
         return entity;
     }
     
-    public List<RetrospectivaCreateDTO> list() {
+    public List<RetrospectivaDTO> list() {
         return repository.findAll()
                 .stream()
-                .map(retro -> objectMapper.convertValue(retro, RetrospectivaCreateDTO.class))
+                .map(retro -> objectMapper.convertValue(retro, RetrospectivaDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -54,7 +58,7 @@ public class RetrospectivaService {
     public RetrospectivaDTO update(Integer id, RetrospectivaCreateDTO retrospectivaCreateDTO) throws RegraDeNegocioException {
         findById(id);
         RetrospectivaEntity entity = objectMapper.convertValue(retrospectivaCreateDTO, RetrospectivaEntity.class);
-        entity.setIdTitulo(id);
+//        entity.setIdTitulo(id);
         RetrospectivaEntity update = repository.save(entity);
         RetrospectivaDTO dto = objectMapper.convertValue(update, RetrospectivaDTO.class);
         return dto;

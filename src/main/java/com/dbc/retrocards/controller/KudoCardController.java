@@ -2,6 +2,8 @@ package com.dbc.retrocards.controller;
 
 import com.dbc.retrocards.dto.KudoCardCreateDTO;
 import com.dbc.retrocards.dto.KudoCardDTO;
+import com.dbc.retrocards.dto.ListarKudoCardDTO;
+import com.dbc.retrocards.dto.ListarSprintDTO;
 import com.dbc.retrocards.service.KudoCardService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,8 +32,8 @@ public class KudoCardController {
             @ApiResponse(code = 500, message = "Foi gerada um exceção")
     })
     @PostMapping
-    public KudoCardDTO create(@RequestBody @Valid KudoCardCreateDTO kudoCardCreateDTO) throws Exception {
-        KudoCardDTO kudoCardDTO = kudoCardService.create(kudoCardCreateDTO);
+    public KudoCardDTO create(Integer id,@RequestBody @Valid KudoCardCreateDTO kudoCardCreateDTO) throws Exception {
+        KudoCardDTO kudoCardDTO = kudoCardService.create(id,kudoCardCreateDTO);
         return kudoCardDTO;
     }
 
@@ -80,5 +82,10 @@ public class KudoCardController {
     @DeleteMapping("/{idKudoCard}")
     public void delete(@PathVariable("idKudoCard") Integer idKudoCard) throws Exception {
         kudoCardService.delete(idKudoCard);
+    }
+
+    @GetMapping("/listar-kudo-card")
+    public List<ListarKudoCardDTO> listarKudoCard() {
+        return kudoCardService.listar();
     }
 }

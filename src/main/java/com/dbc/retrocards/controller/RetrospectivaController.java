@@ -33,8 +33,8 @@ public class RetrospectivaController {
             @ApiResponse(code = 400, message = "Dados do produto inconsistentes"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção no sistema")
     })
-    public RetrospectivaCreateDTO create(@RequestBody @Valid RetrospectivaCreateDTO retrospectivaCreateDTO) throws Exception {
-        return retrospectivaService.create(retrospectivaCreateDTO);
+    public RetrospectivaCreateDTO create(Integer id,@RequestBody @Valid RetrospectivaCreateDTO retrospectivaCreateDTO) throws Exception {
+        return retrospectivaService.create(id,retrospectivaCreateDTO);
     }
 
 
@@ -44,7 +44,7 @@ public class RetrospectivaController {
             @ApiResponse(code = 200, message = "Retrospectivas listadas com sucesso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção no sistema")
     })
-    public List<RetrospectivaCreateDTO> list() {
+    public List<RetrospectivaDTO> list() {
         return retrospectivaService.list();
     }
 
