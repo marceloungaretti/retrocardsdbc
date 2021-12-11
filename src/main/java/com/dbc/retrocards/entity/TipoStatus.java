@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 public enum TipoStatus {
 
 
-    CRIADA(1),
-    FINALIZADA(2);
+    EM_ANDAMENTO(1),
+    ENCERRADA(2);
 
     private int tipo;
 

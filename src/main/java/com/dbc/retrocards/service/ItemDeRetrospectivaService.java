@@ -4,6 +4,9 @@ import com.dbc.retrocards.dto.ItemDeRetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.ItemDeRetrospectivaDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.ItemDeRetrospectivaEntity;
+import com.dbc.retrocards.entity.KudoCardEntity;
+import com.dbc.retrocards.entity.StatusKudoBoxEntity;
+import com.dbc.retrocards.entity.TipoStatus;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.ItemDeRetrospectivaRepository;
 import com.dbc.retrocards.repository.RetrospectivaRepository;
@@ -59,8 +62,19 @@ public class ItemDeRetrospectivaService {
         return dto;
     }
 
+//    public void delete(Integer id) throws RegraDeNegocioException {
+//        ItemDeRetrospectivaEntity entity = findById(id);
+//        itemDeRetrospectivaRepository.delete(entity);
+//    }
+
+
     public void delete(Integer id) throws RegraDeNegocioException {
         ItemDeRetrospectivaEntity entity = findById(id);
-        itemDeRetrospectivaRepository.delete(entity);
+        if (entity.getRetrospectivaEntity().getTipoStatus() == TipoStatus.EM_ANDAMENTO) {
+            itemDeRetrospectivaRepository.delete(entity);
+        } else {
+            throw new RegraDeNegocioException("Item de retrospectiva   encerrado");
+        }
     }
+
 }

@@ -49,7 +49,7 @@ public class RetrospectivaService {
     public RetrospectivaDTO getById(Integer idRetrospectiva) throws RegraDeNegocioException {
         RetrospectivaEntity entity = findById(idRetrospectiva);
         RetrospectivaDTO dto = objectMapper.convertValue(entity, RetrospectivaDTO.class);
-        if(dto.getTipoStatus() == TipoStatus.FINALIZADA){
+        if(dto.getTipoStatus() == TipoStatus.EM_ANDAMENTO){
             throw new RegraDeNegocioException("Retrospectiva não encontrada");
         }
         return dto;
