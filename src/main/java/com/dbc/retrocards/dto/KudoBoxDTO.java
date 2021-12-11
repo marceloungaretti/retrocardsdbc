@@ -1,6 +1,7 @@
 package com.dbc.retrocards.dto;
 
 
+import com.dbc.retrocards.entity.SprintEntity;
 import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,4 +14,6 @@ public class KudoBoxDTO extends KudoBoxCreateDTO{
 
     @ApiModelProperty(value = "Status do KudoBox")
     private StatusKudoBoxEntity statusKudoBoxEntity;
+
+    private SprintDTO sprintDTO;
 }

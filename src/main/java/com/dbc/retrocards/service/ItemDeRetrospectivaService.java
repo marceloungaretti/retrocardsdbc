@@ -2,9 +2,11 @@ package com.dbc.retrocards.service;
 
 import com.dbc.retrocards.dto.ItemDeRetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.ItemDeRetrospectivaDTO;
+import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.ItemDeRetrospectivaEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.ItemDeRetrospectivaRepository;
+import com.dbc.retrocards.repository.RetrospectivaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 public class ItemDeRetrospectivaService {
     private final ItemDeRetrospectivaRepository itemDeRetrospectivaRepository;
     private final ObjectMapper objectMapper;
+    private final RetrospectivaRepository retrospectivaRepository;
 
     private ItemDeRetrospectivaEntity findById(Integer id) throws RegraDeNegocioException {
         ItemDeRetrospectivaEntity entity = itemDeRetrospectivaRepository.findById(id)
@@ -24,10 +27,13 @@ public class ItemDeRetrospectivaService {
         return entity;
     }
 
-    public ItemDeRetrospectivaDTO create(ItemDeRetrospectivaCreateDTO dto) throws Exception {
-        ItemDeRetrospectivaEntity entity = objectMapper.convertValue(dto, ItemDeRetrospectivaEntity.class);
+    public ItemDeRetrospectivaDTO create(Integer id, ItemDeRetrospectivaCreateDTO itemDeRetrospectivaCreateDTO) throws RegraDeNegocioException{
+        ItemDeRetrospectivaEntity entity = objectMapper.convertValue(itemDeRetrospectivaCreateDTO, ItemDeRetrospectivaEntity.class);
+        entity.setRetrospectivaEntity(retrospectivaRepository.findById(id)
+                .orElseThrow(() -> new RegraDeNegocioException("Retrospectiva não encontrada")));
         ItemDeRetrospectivaEntity itemCriado = itemDeRetrospectivaRepository.save(entity);
         ItemDeRetrospectivaDTO itemDeRetrospectivaDTO = objectMapper.convertValue(itemCriado, ItemDeRetrospectivaDTO.class);
+        itemDeRetrospectivaDTO.setRetrospectivaDTO(objectMapper.convertValue(itemCriado.getRetrospectivaEntity(), RetrospectivaDTO.class));
         return itemDeRetrospectivaDTO;
     }
 

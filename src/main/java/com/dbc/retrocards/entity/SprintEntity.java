@@ -27,4 +27,8 @@ public class SprintEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "sprintEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RetrospectivaEntity> retrospectivaEntityList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "sprintEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<KudoBoxEntity> kudoBoxEntityList;
 }

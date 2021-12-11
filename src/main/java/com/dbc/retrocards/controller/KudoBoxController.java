@@ -30,8 +30,8 @@ public class KudoBoxController {
             @ApiResponse(code = 500, message = "Foi gerada um exceção")
     })
     @PostMapping
-    public KudoBoxDTO create(@RequestBody @Valid KudoBoxCreateDTO kudoBoxCreateDTO) throws Exception {
-        KudoBoxDTO kudoBoxDTO = kudoBoxService.create(kudoBoxCreateDTO);
+    public KudoBoxDTO create(Integer id,@RequestBody @Valid KudoBoxCreateDTO kudoBoxCreateDTO) throws Exception {
+        KudoBoxDTO kudoBoxDTO = kudoBoxService.create(id,kudoBoxCreateDTO);
         return kudoBoxDTO;
     }
 

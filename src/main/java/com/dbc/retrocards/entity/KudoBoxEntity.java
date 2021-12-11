@@ -35,4 +35,9 @@ public class KudoBoxEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "kudoBox", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<KudoCardEntity> kudocards;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_sprint", referencedColumnName = "id_sprint")
+    private SprintEntity sprintEntity;
 }

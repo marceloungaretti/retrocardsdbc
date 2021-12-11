@@ -32,8 +32,8 @@ public class ItemDeRetrospectivaController {
             @ApiResponse(code = 500, message = "Foi gerada um exceção")
     })
     @PostMapping
-    public ItemDeRetrospectivaDTO create(@RequestBody @Valid ItemDeRetrospectivaCreateDTO itemDeRetrospectivaCreateDTO) throws Exception {
-        ItemDeRetrospectivaDTO itemDeRetrospectivaDTO = itemDeRetrospectivaService.create(itemDeRetrospectivaCreateDTO);
+    public ItemDeRetrospectivaDTO create(Integer id, @RequestBody @Valid ItemDeRetrospectivaCreateDTO itemDeRetrospectivaCreateDTO) throws Exception {
+        ItemDeRetrospectivaDTO itemDeRetrospectivaDTO = itemDeRetrospectivaService.create(id, itemDeRetrospectivaCreateDTO);
         return itemDeRetrospectivaDTO;
     }
 

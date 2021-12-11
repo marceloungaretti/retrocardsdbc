@@ -24,6 +24,4 @@ public class ItemDeRetrospectivaCreateDTO {
     @ApiModelProperty(value = "Descrição")
     private String descricao;
 
-    @ApiModelProperty(value = "Retrospectiva")
-    private RetrospectivaEntity retrospectivaEntity;
 }

@@ -14,4 +14,5 @@ public class SprintDTO {
     private String titulo;
     private LocalDate dataInicio;
     private LocalDate dataConclusao;
+
 }
