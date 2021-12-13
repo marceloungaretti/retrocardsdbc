@@ -10,8 +10,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public enum StatusKudoBoxEntity {
-    EM_ANDAMENTO(0),
-    ENCERRADO(1);
+   CRIADO (0),
+    EM_ANDAMENTO(1),
+    ENCERRADO(2);
 
     private Integer status;
 }

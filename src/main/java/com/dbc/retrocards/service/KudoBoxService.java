@@ -4,6 +4,7 @@ import com.dbc.retrocards.dto.KudoBoxCreateDTO;
 import com.dbc.retrocards.dto.KudoBoxDTO;
 import com.dbc.retrocards.dto.SprintDTO;
 import com.dbc.retrocards.entity.KudoBoxEntity;
+import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.KudoBoxRepository;
 import com.dbc.retrocards.repository.SprintRepository;
@@ -30,7 +31,8 @@ public class KudoBoxService {
     public KudoBoxDTO create(Integer id , KudoBoxCreateDTO kudoBoxCreateDTO) throws RegraDeNegocioException {
         KudoBoxEntity entity = objectMapper.convertValue(kudoBoxCreateDTO, KudoBoxEntity.class);
         entity.setSprintEntity(sprintRepository.findById(id)
-                .orElseThrow(() -> new RegraDeNegocioException("KudoBox não encontrada")));;
+                .orElseThrow(() -> new RegraDeNegocioException("KudoBox não encontrada")));
+        entity.setStatusKudoBoxEntity(StatusKudoBoxEntity.CRIADO);
         KudoBoxEntity kudoBoxCriado = kudoBoxRepository.save(entity);
         KudoBoxDTO kudoBoxDTO = objectMapper.convertValue(kudoBoxCriado, KudoBoxDTO.class);
         kudoBoxDTO.setSprintDTO(objectMapper.convertValue(kudoBoxCriado.getSprintEntity(), SprintDTO.class));

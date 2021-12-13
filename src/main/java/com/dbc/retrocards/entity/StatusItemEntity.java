@@ -4,9 +4,10 @@ package com.dbc.retrocards.entity;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum TipoStatus {
+public enum StatusItemEntity {
 
 
+    CRIADA(0),
     EM_ANDAMENTO(1),
     ENCERRADA(2);
 
