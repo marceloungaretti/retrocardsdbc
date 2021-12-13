@@ -4,8 +4,7 @@ import com.dbc.retrocards.dto.ItemDeRetrospectivaDTO;
 import com.dbc.retrocards.dto.RetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
-import com.dbc.retrocards.entity.StatusItemEntity;
-import com.dbc.retrocards.entity.StatusKudoBoxEntity;
+import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.RetrospectivaRepository;
 import com.dbc.retrocards.repository.SprintRepository;
@@ -27,7 +26,7 @@ public class RetrospectivaService {
     public RetrospectivaDTO create(Integer id, RetrospectivaCreateDTO retrospectivaCreateDTO) throws RegraDeNegocioException {
         RetrospectivaEntity entity = objectMapper.convertValue(retrospectivaCreateDTO, RetrospectivaEntity.class);
         entity.setSprintEntity(sprintRepository.findById(id).orElseThrow(() -> new RegraDeNegocioException("Sprint não encontrada")));
-        entity.setStatusItemEntity(StatusItemEntity.CRIADA);
+        entity.setStatusRetrospectivaEntity(StatusRetrospectivaEntity.CRIADA);
         RetrospectivaEntity retrospectivaCriar = repository.save(entity);
         RetrospectivaDTO retroDTO = objectMapper.convertValue(retrospectivaCriar, RetrospectivaDTO.class);
         return retroDTO;
@@ -51,7 +50,7 @@ public class RetrospectivaService {
     public RetrospectivaDTO getById(Integer idRetrospectiva) throws RegraDeNegocioException {
         RetrospectivaEntity entity = findById(idRetrospectiva);
         RetrospectivaDTO dto = objectMapper.convertValue(entity, RetrospectivaDTO.class);
-        if(dto.getStatusItemEntity() == StatusItemEntity.EM_ANDAMENTO){
+        if(dto.getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO){
             throw new RegraDeNegocioException("Retrospectiva não encontrada");
         }
         return dto;
@@ -64,6 +63,13 @@ public class RetrospectivaService {
         RetrospectivaEntity update = repository.save(entity);
         RetrospectivaDTO dto = objectMapper.convertValue(update, RetrospectivaDTO.class);
         return dto;
+    }
+
+    public RetrospectivaDTO updateStatus(Integer idRetrospectiva, StatusRetrospectivaEntity status) throws RegraDeNegocioException {
+        RetrospectivaEntity entity = findById(idRetrospectiva);
+        entity.setStatusRetrospectivaEntity(status);
+        RetrospectivaEntity update = repository.save(entity);
+        return objectMapper.convertValue(update, RetrospectivaDTO.class);
     }
 
 

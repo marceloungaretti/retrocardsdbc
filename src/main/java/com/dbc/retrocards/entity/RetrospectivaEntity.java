@@ -27,7 +27,7 @@ public class RetrospectivaEntity {
     private  String tituloRetrospectiva;
 
     @Column(name = "status")
-    private StatusItemEntity statusItemEntity;
+    private StatusRetrospectivaEntity statusRetrospectivaEntity;
 
 
     @Column(name = "data")

@@ -4,7 +4,7 @@ import com.dbc.retrocards.dto.ItemDeRetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.ItemDeRetrospectivaDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.ItemDeRetrospectivaEntity;
-import com.dbc.retrocards.entity.StatusItemEntity;
+import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.ItemDeRetrospectivaRepository;
 import com.dbc.retrocards.repository.RetrospectivaRepository;
@@ -64,7 +64,7 @@ public class ItemDeRetrospectivaService {
 
     public void delete(Integer id) throws RegraDeNegocioException {
         ItemDeRetrospectivaEntity entity = findById(id);
-        if (entity.getRetrospectivaEntity().getStatusItemEntity() == StatusItemEntity.EM_ANDAMENTO) {
+        if (entity.getRetrospectivaEntity().getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
             itemDeRetrospectivaRepository.delete(entity);
         } else {
             throw new RegraDeNegocioException("Item de retrospectiva   encerrado");

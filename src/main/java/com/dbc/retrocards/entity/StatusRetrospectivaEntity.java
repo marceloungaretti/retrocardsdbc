@@ -4,7 +4,7 @@ package com.dbc.retrocards.entity;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum StatusItemEntity {
+public enum StatusRetrospectivaEntity {
 
 
     CRIADA(0),

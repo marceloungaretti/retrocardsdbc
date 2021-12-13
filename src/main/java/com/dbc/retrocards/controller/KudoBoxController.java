@@ -2,6 +2,9 @@ package com.dbc.retrocards.controller;
 
 import com.dbc.retrocards.dto.KudoBoxCreateDTO;
 import com.dbc.retrocards.dto.KudoBoxDTO;
+import com.dbc.retrocards.dto.RetrospectivaDTO;
+import com.dbc.retrocards.entity.StatusKudoBoxEntity;
+import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import com.dbc.retrocards.service.KudoBoxService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -56,6 +59,12 @@ public class KudoBoxController {
     @GetMapping("/{idKudoBox}")
     public KudoBoxDTO getById(@RequestParam("idKudoBox") Integer idKudoBox) throws Exception {
         return kudoBoxService.getById(idKudoBox);
+    }
+
+    @PutMapping("/{idKudoBox}/status")
+    public KudoBoxDTO updateStatus(@PathVariable("idKudoBox") Integer idKudoBox,
+                                         @RequestParam @Valid StatusKudoBoxEntity status) throws Exception {
+        return kudoBoxService.updateStatus(idKudoBox, status);
     }
 
 
