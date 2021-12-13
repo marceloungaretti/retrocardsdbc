@@ -1,6 +1,6 @@
 package com.dbc.retrocards.dto;
 
-import com.dbc.retrocards.entity.StatusItemEntity;
+import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -12,6 +12,6 @@ public class RetrospectivaCreateDTO {
     @ApiModelProperty(value = "Data de criação do reunião")
     private LocalDate dataReuniao;
     @ApiModelProperty(value = "1 - CRIADO   2 - ANDAMENTO")
-    private StatusItemEntity statusItemEntity;
+    private StatusRetrospectivaEntity statusRetrospectivaEntity;
 
 }

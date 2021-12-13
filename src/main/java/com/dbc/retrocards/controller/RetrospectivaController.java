@@ -4,6 +4,7 @@ package com.dbc.retrocards.controller;
 import com.dbc.retrocards.dto.RetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
+import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.service.RetrospectivaService;
 import io.swagger.annotations.ApiOperation;
@@ -54,7 +55,7 @@ public class RetrospectivaController {
         return retrospectivaService.findById(idRetrospectiva);
     }
 
-    @ApiOperation(value = "Atualiza umA Retrospectiva pelo seu ID")
+    @ApiOperation(value = "Atualiza uma Retrospectiva pelo seu ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna retrospectiva atualizado com sucesso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
@@ -63,6 +64,12 @@ public class RetrospectivaController {
     public RetrospectivaDTO update(@PathVariable("idRetrospectiva") Integer id,
                                    @RequestBody @Valid RetrospectivaCreateDTO retroCreateDTO) throws Exception {
         return retrospectivaService.update(id, retroCreateDTO);
+    }
+
+    @PutMapping("/{idRetrospectiva}/status")
+    public RetrospectivaDTO updateStatus(@PathVariable("idRetrospectiva") Integer idRetrospectiva,
+                                         @RequestParam @Valid StatusRetrospectivaEntity status) throws Exception {
+        return retrospectivaService.updateStatus(idRetrospectiva, status);
     }
 
 
