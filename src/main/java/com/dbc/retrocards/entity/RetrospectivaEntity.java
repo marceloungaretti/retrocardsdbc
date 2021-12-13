@@ -24,13 +24,11 @@ public class RetrospectivaEntity {
     private Integer idRetrospectiva;
 
     @Column(name = "titulo")
-    private  String idTitulo;
+    private  String tituloRetrospectiva;
 
     @Column(name = "status")
     private TipoStatus tipoStatus;
 
-    @Column(name = "descricao")
-    private  String descricao;
 
     @Column(name = "data")
     private LocalDate dataReuniao;
