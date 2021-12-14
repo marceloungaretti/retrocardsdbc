@@ -76,7 +76,7 @@ public class ItemDeRetrospectivaService {
         if (entity.getRetrospectivaEntity().getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
             itemDeRetrospectivaRepository.delete(entity);
         } else {
-            throw new RegraDeNegocioException("Item de retrospectiva   encerrado");
+            throw new RegraDeNegocioException("Não é possivel deletar. Status Incorreto.");
         }
     }
 
