@@ -4,6 +4,8 @@ import com.dbc.retrocards.dto.ItemDeRetrospectivaDTO;
 import com.dbc.retrocards.dto.RetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
+import com.dbc.retrocards.entity.SprintEntity;
+import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.RetrospectivaRepository;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -38,7 +41,7 @@ public class RetrospectivaService {
                 .orElseThrow(() -> new RegraDeNegocioException("Titulo não encontrado não encontrado."));
         return entity;
     }
-    
+
     public List<RetrospectivaDTO> list() {
         return repository.findAll()
                 .stream()
@@ -85,15 +88,29 @@ public class RetrospectivaService {
     }
 
     public RetrospectivaDTO updateStatus(Integer idRetrospectiva, StatusRetrospectivaEntity status) throws RegraDeNegocioException {
-        RetrospectivaEntity entity = findById(idRetrospectiva);
-        entity.setStatusRetrospectivaEntity(status);
-        RetrospectivaEntity update = repository.save(entity);
-        return objectMapper.convertValue(update, RetrospectivaDTO.class);
-    }
+        Optional<RetrospectivaEntity> entity = repository.findById(idRetrospectiva);
+        SprintEntity sprintEntity = entity.get().getSprintEntity();
+        for (RetrospectivaEntity entity2 : sprintEntity.getRetrospectivaEntityList()) {
+            if (entity2.getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
+                throw new RegraDeNegocioException("Não é possivel iniciar. Status em andamento em uso");
+            }
+        }
+            RetrospectivaEntity entity2 = findById(idRetrospectiva);
+            entity2.setStatusRetrospectivaEntity(status);
+            RetrospectivaEntity update = repository.save(entity2);
+            return objectMapper.convertValue(update, RetrospectivaDTO.class);
+        }
 
+
+
+//    if (entity.getKudoBox().getStatusKudoBoxEntity() == StatusKudoBoxEntity.EM_ANDAMENTO) {
+//        kudoCardRepository.delete(entity);
+//    } else {
+//        throw new RegraDeNegocioException("Não é possivel deletar. Status Incorreto.");
+//    }
 
     public void delete(Integer idRetrospectiva) throws RegraDeNegocioException {
-       RetrospectivaEntity entity = findById(idRetrospectiva);
+        RetrospectivaEntity entity = findById(idRetrospectiva);
         repository.delete(entity);
 
     }
