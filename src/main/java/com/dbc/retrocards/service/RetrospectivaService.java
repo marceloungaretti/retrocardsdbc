@@ -92,8 +92,9 @@ public class RetrospectivaService {
         SprintEntity sprintEntity = entity.get().getSprintEntity();
         for (RetrospectivaEntity entity2 : sprintEntity.getRetrospectivaEntityList()) {
             if (entity2.getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
+                if(status == StatusRetrospectivaEntity.EM_ANDAMENTO){
                 throw new RegraDeNegocioException("Não é possivel iniciar. Status em andamento em uso");
-            }
+            }}
         }
             RetrospectivaEntity entity2 = findById(idRetrospectiva);
             entity2.setStatusRetrospectivaEntity(status);
