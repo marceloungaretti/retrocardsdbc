@@ -66,7 +66,7 @@ public class KudoCardService {
         if (entity.getKudoBox().getStatusKudoBoxEntity() == StatusKudoBoxEntity.EM_ANDAMENTO) {
             kudoCardRepository.delete(entity);
         } else {
-            throw new RegraDeNegocioException("KudoBox já encerrada");
+            throw new RegraDeNegocioException("KudoBox deletada");
         }
     }
 
