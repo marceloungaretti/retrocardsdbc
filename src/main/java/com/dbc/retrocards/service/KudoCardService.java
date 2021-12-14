@@ -4,6 +4,7 @@ import com.dbc.retrocards.dto.KudoBoxDTO;
 import com.dbc.retrocards.dto.KudoCardCreateDTO;
 import com.dbc.retrocards.dto.KudoCardDTO;
 import com.dbc.retrocards.dto.ListarKudoCardDTO;
+import com.dbc.retrocards.entity.KudoBoxEntity;
 import com.dbc.retrocards.entity.KudoCardEntity;
 import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
@@ -77,4 +78,23 @@ public class KudoCardService {
                     return listarKudoCardDTO;
                 }).collect(Collectors.toList());
     }
+
+    public List<KudoCardDTO> listarPorBox(Integer idKudoBox) throws RegraDeNegocioException{
+        return kudoCardRepository.findByIdBox(idKudoBox).stream()
+                .map(card -> {
+                    KudoCardDTO cardDTO = objectMapper.convertValue(card, KudoCardDTO.class);
+                    return cardDTO;
+                })
+                .collect(Collectors.toList());
+    }
+
+//    public List<ItemDeRetrospectivaDTO> getByIdRetro(Integer id) throws RegraDeNegocioException {
+//        return itemDeRetrospectivaRepository.findByIdRetro(id).stream()
+//                .map(retrospectivaEntity -> {
+//                    ItemDeRetrospectivaDTO itemDeRetrospectivaDTO = objectMapper.convertValue(retrospectivaEntity, ItemDeRetrospectivaDTO.class);
+////                    itemDeRetrospectivaDTO.setRetrospectivaDTO(retrospectivaEntity.getItens().stream().map(retro -> objectMapper.convertValue(retro, ItemDeRetrospectivaDTO.class)).collect(Collectors.toList()));
+//                    return itemDeRetrospectivaDTO;
+//                })
+//                .collect(Collectors.toList());
+//    }
 }

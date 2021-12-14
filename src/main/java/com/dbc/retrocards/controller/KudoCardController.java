@@ -4,6 +4,7 @@ import com.dbc.retrocards.dto.KudoCardCreateDTO;
 import com.dbc.retrocards.dto.KudoCardDTO;
 import com.dbc.retrocards.dto.ListarKudoCardDTO;
 import com.dbc.retrocards.dto.ListarSprintDTO;
+import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.service.KudoCardService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -87,5 +88,10 @@ public class KudoCardController {
     @GetMapping("/listar-kudo-card")
     public List<ListarKudoCardDTO> listarKudoCard() {
         return kudoCardService.listar();
+    }
+
+    @GetMapping("/list-por-box")
+    public List<KudoCardDTO> listarPorBox(Integer id) throws RegraDeNegocioException {
+        return kudoCardService.listarPorBox(id);
     }
 }

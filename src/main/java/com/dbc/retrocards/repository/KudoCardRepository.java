@@ -13,4 +13,7 @@ public interface KudoCardRepository extends JpaRepository<KudoCardEntity, Intege
 
     @Query(value ="select * from kudocard k order by  data_criacao asc",nativeQuery = true)
     List<KudoCardEntity> listarKudoCardPorDataAsc ();
+
+    @Query(value = "SELECT * from kudocard WHERE id_kudobox = :id", nativeQuery = true)
+    List<KudoCardEntity> findByIdBox(Integer id);
 }
