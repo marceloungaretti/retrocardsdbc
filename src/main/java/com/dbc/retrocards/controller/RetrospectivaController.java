@@ -85,7 +85,7 @@ public class RetrospectivaController {
         retrospectivaService.delete(id);
     }
     @GetMapping("/id-sprint")
-    public List<RetrospectivaDTO> listByIdSrint(@Valid @RequestParam("idSprint") Integer id) throws RegraDeNegocioException {
+    public List<RetrospectivaDTO> listByIdSprint(@Valid @RequestParam("idSprint") Integer id) throws RegraDeNegocioException {
         return retrospectivaService.getByIdSprint(id);
     }
     }

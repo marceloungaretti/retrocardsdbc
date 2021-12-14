@@ -1,9 +1,6 @@
 package com.dbc.retrocards.service;
 
-import com.dbc.retrocards.dto.KudoBoxCreateDTO;
-import com.dbc.retrocards.dto.KudoBoxDTO;
-import com.dbc.retrocards.dto.RetrospectivaDTO;
-import com.dbc.retrocards.dto.SprintDTO;
+import com.dbc.retrocards.dto.*;
 import com.dbc.retrocards.entity.KudoBoxEntity;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
 import com.dbc.retrocards.entity.StatusKudoBoxEntity;
@@ -74,5 +71,15 @@ public class KudoBoxService {
     public void delete(Integer id) throws RegraDeNegocioException {
         KudoBoxEntity entity = findById(id);
         kudoBoxRepository.delete(entity);
+    }
+
+    public List<KudoBoxDTO> getBoxByIdSprint(Integer id) throws RegraDeNegocioException {
+        return kudoBoxRepository.findBoxByIdSprint(id).stream()
+                .map(kudoBoxEntity -> {
+                    KudoBoxDTO kudoBoxDTO = objectMapper.convertValue(kudoBoxEntity, KudoBoxDTO.class);
+//                    kudoBoxDTO.(retrospectivaEntity.getItens().stream().map(retro -> objectMapper.convertValue(retro, ItemDeRetrospectivaDTO.class)).collect(Collectors.toList()));
+                    return kudoBoxDTO;
+                })
+                .collect(Collectors.toList());
     }
 }

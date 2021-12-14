@@ -5,6 +5,7 @@ import com.dbc.retrocards.dto.KudoBoxDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
+import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.service.KudoBoxService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -89,5 +90,10 @@ public class KudoBoxController {
     @DeleteMapping("/{idKudoBox}")
     public void delete(@PathVariable("idKudoBox") Integer idKudoBox) throws Exception {
         kudoBoxService.delete(idKudoBox);
+    }
+
+    @GetMapping("/id-sprint")
+    public List<KudoBoxDTO> listBoxByIdSprint(@Valid @RequestParam("idSprint") Integer id) throws RegraDeNegocioException {
+        return kudoBoxService.getBoxByIdSprint(id);
     }
 }
