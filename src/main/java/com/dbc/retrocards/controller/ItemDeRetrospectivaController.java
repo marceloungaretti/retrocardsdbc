@@ -55,9 +55,9 @@ public class ItemDeRetrospectivaController {
             @ApiResponse(code = 200, message = "Retorna o Item de Retrospectiva com sucesso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
-    @GetMapping("/{idItem}")
-    public ItemDeRetrospectivaDTO getById(@RequestParam("idItem") Integer idItem) throws Exception {
-        return itemDeRetrospectivaService.getById(idItem);
+    @GetMapping("/{idRetro}")
+    public List<ItemDeRetrospectivaDTO> getByIdRetro(@RequestParam("idRetro") Integer idRetro) throws Exception {
+        return itemDeRetrospectivaService.getByIdRetro(idRetro);
     }
 
 

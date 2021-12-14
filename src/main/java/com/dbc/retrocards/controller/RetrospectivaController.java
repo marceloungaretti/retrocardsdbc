@@ -1,6 +1,7 @@
 package com.dbc.retrocards.controller;
 
 
+import com.dbc.retrocards.dto.ItemDeRetrospectivaDTO;
 import com.dbc.retrocards.dto.RetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
@@ -50,10 +51,10 @@ public class RetrospectivaController {
         return retrospectivaService.list();
     }
 
-    @GetMapping("/{idRetrospectiva}")
-    public RetrospectivaEntity getById(@RequestParam("idTitulo") Integer idRetrospectiva) throws Exception {
-        return retrospectivaService.findById(idRetrospectiva);
-    }
+//    @GetMapping("/{idRetrospectiva}")
+//    public List<ItemDeRetrospectivaDTO> getById(@RequestParam("idTitulo") Integer idRetrospectiva) throws Exception {
+//        return retrospectivaService.getById(idRetrospectiva);
+//    }
 
     @ApiOperation(value = "Atualiza uma Retrospectiva pelo seu ID")
     @ApiResponses(value = {
