@@ -47,13 +47,22 @@ public class RetrospectivaService {
 
     }
 
-    public RetrospectivaDTO getById(Integer idRetrospectiva) throws RegraDeNegocioException {
-        RetrospectivaEntity entity = findById(idRetrospectiva);
-        RetrospectivaDTO dto = objectMapper.convertValue(entity, RetrospectivaDTO.class);
-        if(dto.getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO){
-            throw new RegraDeNegocioException("Retrospectiva não encontrada");
-        }
-        return dto;
+//    public List<ItemDeRetrospectivaDTO> getById(Integer idRetrospectiva) throws RegraDeNegocioException {
+//        return repository.findByIdRetro(idRetrospectiva).stream().map(item ->{
+//            ItemDeRetrospectivaDTO itemDeRetrospectivaDTO = objectMapper.convertValue(item, ItemDeRetrospectivaDTO.class);
+//
+//            return itemDeRetrospectivaDTO;
+//        }).collect(Collectors.toList());
+//    }
+
+    public List<RetrospectivaDTO> getByIdSprint(Integer id) throws RegraDeNegocioException {
+        return repository.findByIdSprint(id).stream()
+                .map(retrospectivaEntity -> {
+                    RetrospectivaDTO retrospectivaDTO = objectMapper.convertValue(retrospectivaEntity, RetrospectivaDTO.class);
+                    retrospectivaDTO.setItemDeRetrospectivaDTO(retrospectivaEntity.getItens().stream().map(retro -> objectMapper.convertValue(retro, ItemDeRetrospectivaDTO.class)).collect(Collectors.toList()));
+                    return retrospectivaDTO;
+                })
+                .collect(Collectors.toList());
     }
 
     public RetrospectivaDTO update(Integer id, RetrospectivaCreateDTO retrospectivaCreateDTO) throws RegraDeNegocioException {
@@ -77,16 +86,5 @@ public class RetrospectivaService {
        RetrospectivaEntity entity = findById(idRetrospectiva);
         repository.delete(entity);
 
-    }
-
-
-    public List<RetrospectivaDTO> getByIdSprint(Integer id) throws RegraDeNegocioException {
-        return repository.findByIdSprint(id).stream()
-                .map(retrospectivaEntity -> {
-                    RetrospectivaDTO retrospectivaDTO = objectMapper.convertValue(retrospectivaEntity, RetrospectivaDTO.class);
-                    retrospectivaDTO.setItemDeRetrospectivaDTO(retrospectivaEntity.getItens().stream().map(retro -> objectMapper.convertValue(retro, ItemDeRetrospectivaDTO.class)).collect(Collectors.toList()));
-                    return retrospectivaDTO;
-                })
-                .collect(Collectors.toList());
     }
 }

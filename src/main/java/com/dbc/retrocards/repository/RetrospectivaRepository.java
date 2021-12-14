@@ -1,5 +1,6 @@
 package com.dbc.retrocards.repository;
 
+import com.dbc.retrocards.entity.ItemDeRetrospectivaEntity;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

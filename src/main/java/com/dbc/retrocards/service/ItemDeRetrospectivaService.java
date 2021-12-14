@@ -51,6 +51,15 @@ public class ItemDeRetrospectivaService {
         return dto;
     }
 
+    public List<ItemDeRetrospectivaDTO> getByIdRetro(Integer id) throws RegraDeNegocioException {
+        return itemDeRetrospectivaRepository.findByIdRetro(id).stream()
+                .map(retrospectivaEntity -> {
+                    ItemDeRetrospectivaDTO itemDeRetrospectivaDTO = objectMapper.convertValue(retrospectivaEntity, ItemDeRetrospectivaDTO.class);
+                    return itemDeRetrospectivaDTO;
+                })
+                .collect(Collectors.toList());
+    }
+
     public ItemDeRetrospectivaDTO update(Integer id, ItemDeRetrospectivaCreateDTO itemDeRetrospectivaCreateDTO) throws RegraDeNegocioException {
         findById(id);
         ItemDeRetrospectivaEntity entity = objectMapper.convertValue(itemDeRetrospectivaCreateDTO, ItemDeRetrospectivaEntity.class);
