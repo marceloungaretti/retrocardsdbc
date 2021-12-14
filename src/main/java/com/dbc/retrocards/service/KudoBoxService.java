@@ -1,18 +1,17 @@
 package com.dbc.retrocards.service;
 
 import com.dbc.retrocards.dto.*;
-import com.dbc.retrocards.entity.KudoBoxEntity;
-import com.dbc.retrocards.entity.RetrospectivaEntity;
-import com.dbc.retrocards.entity.StatusKudoBoxEntity;
-import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
+import com.dbc.retrocards.entity.*;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.KudoBoxRepository;
+import com.dbc.retrocards.repository.KudoCardRepository;
 import com.dbc.retrocards.repository.SprintRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,10 +60,35 @@ public class KudoBoxService {
         return dto;
     }
 
+//    public RetrospectivaDTO updateStatus(Integer idRetrospectiva, StatusRetrospectivaEntity status) throws RegraDeNegocioException {
+//        Optional<RetrospectivaEntity> entity = repository.findById(idRetrospectiva);
+//        SprintEntity sprintEntity = entity.get().getSprintEntity();
+//        for (RetrospectivaEntity entity2 : sprintEntity.getRetrospectivaEntityList()) {
+//            if (entity2.getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
+//                if (status == StatusRetrospectivaEntity.EM_ANDAMENTO) {
+//                    throw new RegraDeNegocioException("Não é possivel iniciar. Status em andamento em uso");
+//                }
+//            }
+//        }
+//        RetrospectivaEntity entity2 = findById(idRetrospectiva);
+//        entity2.setStatusRetrospectivaEntity(status);
+//        RetrospectivaEntity update = repository.save(entity2);
+//        return objectMapper.convertValue(update, RetrospectivaDTO.class);
+//    }
+
     public KudoBoxDTO updateStatus(Integer idKudoBox, StatusKudoBoxEntity status) throws RegraDeNegocioException {
-        KudoBoxEntity entity = findById(idKudoBox);
-        entity.setStatusKudoBoxEntity(status);
-        KudoBoxEntity update = kudoBoxRepository.save(entity);
+        Optional<KudoBoxEntity> entity = kudoBoxRepository.findById(idKudoBox);
+        SprintEntity sprintEntity = entity.get().getSprintEntity();
+        for (KudoBoxEntity entity2 : sprintEntity.getKudoBoxEntityList()) {
+            if (entity2.getStatusKudoBoxEntity() == StatusKudoBoxEntity.EM_ANDAMENTO) {
+                if (status == StatusKudoBoxEntity.EM_ANDAMENTO) {
+                    throw new RegraDeNegocioException("Não é possivel iniciar. Status em andamento em uso");
+                }
+            }
+        }
+        KudoBoxEntity entity2 = findById(idKudoBox);
+        entity2.setStatusKudoBoxEntity(status);
+        KudoBoxEntity update = kudoBoxRepository.save(entity2);
         return objectMapper.convertValue(update, KudoBoxDTO.class);
     }
 
