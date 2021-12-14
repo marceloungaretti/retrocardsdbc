@@ -13,4 +13,9 @@ import java.util.List;
  @Query(value = "SELECT * from retrospectiva WHERE id_sprint = :id", nativeQuery = true)
  List<RetrospectivaEntity> findByIdSprint(Integer id);
 
+ @Query(value = "SELECT * from retrospectiva WHERE id_retrospectiva = :id", nativeQuery = true)
+ List<RetrospectivaEntity> findByIdRetro(Integer id);
+
+
+
 }

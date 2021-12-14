@@ -89,6 +89,11 @@ public class RetrospectivaController {
     public List<RetrospectivaDTO> listByIdSprint(@Valid @RequestParam("idSprint") Integer id) throws RegraDeNegocioException {
         return retrospectivaService.getByIdSprint(id);
     }
+
+    @GetMapping("/id-retro")
+    public List<RetrospectivaDTO> listByIdRetro(@Valid @RequestParam("idRetro") Integer id) throws RegraDeNegocioException {
+        return retrospectivaService.getByIdRetro(id);
+    }
     }
 
 
