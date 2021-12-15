@@ -15,6 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -49,5 +51,8 @@ public class KudoCardServiceTest {
         kudoCardService.delete(1);
         verify(kudoCardRepository, times(1)).delete(entity);
     }
+
+
+
 
 }
