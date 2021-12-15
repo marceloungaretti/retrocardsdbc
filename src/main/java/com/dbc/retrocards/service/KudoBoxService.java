@@ -82,7 +82,7 @@ public class KudoBoxService {
         for (KudoBoxEntity entity2 : sprintEntity.getKudoBoxEntityList()) {
             if (entity2.getStatusKudoBoxEntity() == StatusKudoBoxEntity.EM_ANDAMENTO) {
                 if (status == StatusKudoBoxEntity.EM_ANDAMENTO) {
-                    throw new RegraDeNegocioException("Não é possivel iniciar. Status em andamento em uso");
+                    throw new RegraDeNegocioException("Não é possivel iniciar. Status EM ANDMENTO impossibilita a mudança");
                 }
             }
         }

@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -51,5 +53,6 @@ public class RetrospectivaServiceTest {
 //    doReturn(Optional.of(entity)).when(kudoCardRepository).findById(1);
 //        kudoCardService.delete(1);
 //    verify(kudoCardRepository, times(1)).delete(entity);
+
 
 }
