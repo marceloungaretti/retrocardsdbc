@@ -1,7 +1,11 @@
 package com.dbc.retrocards.dto;
 
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
@@ -9,6 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class GrupoDTO {
+
     private Integer idGrupo;
 
     private String nome;

@@ -38,7 +38,7 @@ public class RetrospectivaService {
 
     public RetrospectivaEntity findById(Integer idRetrospectiva) throws RegraDeNegocioException {
         RetrospectivaEntity entity = repository.findById(idRetrospectiva)
-                .orElseThrow(() -> new RegraDeNegocioException("Titulo não encontrado não encontrado."));
+                .orElseThrow(() -> new RegraDeNegocioException("Titulo da retrospectiva  não encontrado"));
         return entity;
     }
 
@@ -104,7 +104,7 @@ public class RetrospectivaService {
         for (RetrospectivaEntity entity2 : sprintEntity.getRetrospectivaEntityList()) {
             if (entity2.getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
                 if (status == StatusRetrospectivaEntity.EM_ANDAMENTO) {
-                    throw new RegraDeNegocioException("Não é possivel iniciar. Status em andamento em uso");
+                    throw new RegraDeNegocioException("Não é possivel iniciar. Status EM ANDMENTO impossibilita a mudança.");
                 }
             }
         }
