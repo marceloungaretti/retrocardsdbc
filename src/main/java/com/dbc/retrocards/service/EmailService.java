@@ -45,22 +45,22 @@ public class EmailService {
         EmailEntity entity = objectMapper.convertValue(emailCreateDTO, EmailEntity.class);
         EmailEntity emailCriar = emailRepository.save(entity);
         EmailDTO emailDTO = objectMapper.convertValue(emailCriar, EmailDTO.class);
-         enviarEmailComTemplate(emailDTO);
+        enviarEmailComTemplate(emailDTO);
         return emailDTO;
     }
 
-    public void enviarEmailComTemplate( EmailDTO emailDTO) throws MessagingException, IOException, TemplateException {
+    public void enviarEmailComTemplate(EmailDTO emailDTO) throws MessagingException, IOException, TemplateException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
         helper.setFrom(remetente);
-        helper.setTo( emailDTO.getEmailDestinatario().split(", "));
+        helper.setTo(emailDTO.getEmailDestinatario().split(","));
         helper.setSubject(emailDTO.getAssunto());
 
         Template template = configuration.getTemplate("email-template.ftl");
         Map<String, Object> dados = new HashMap<>();
-        dados.put("email", remetente );
+        dados.put("email", remetente);
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
 
         helper.setText(html, true);

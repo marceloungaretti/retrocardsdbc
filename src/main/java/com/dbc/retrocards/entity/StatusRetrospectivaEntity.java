@@ -2,8 +2,14 @@ package com.dbc.retrocards.entity;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@Getter
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public enum StatusRetrospectivaEntity {
 
 
@@ -11,10 +17,7 @@ public enum StatusRetrospectivaEntity {
     EM_ANDAMENTO(1),
     ENCERRADA(2);
 
-    private int tipo;
+    private Integer tipo;
 
-    public int getTipo() {
-        return tipo;
-    }
 }
 

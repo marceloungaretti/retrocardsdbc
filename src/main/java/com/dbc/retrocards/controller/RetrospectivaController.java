@@ -100,6 +100,10 @@ public class RetrospectivaController {
     public List<RetrospectivaDTO> listByIdRetro(@Valid @RequestParam("idRetro") Integer id) throws RegraDeNegocioException {
         return retrospectivaService.getByIdRetro(id);
     }
+    @GetMapping("/findo-retro-mais-recente")
+    public List<RetrospectivaDTO> findRetroMaisRecente() throws RegraDeNegocioException {
+        return retrospectivaService.getRetroMaisRecente();
+    }
 }
 
 

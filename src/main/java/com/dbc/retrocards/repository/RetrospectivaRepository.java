@@ -16,6 +16,9 @@ import java.util.List;
  @Query(value = "SELECT * from retrospectiva WHERE id_retrospectiva = :id", nativeQuery = true)
  List<RetrospectivaEntity> findByIdRetro(Integer id);
 
+ @Query(value = "select * from retrospectiva where status = '1' order by data desc,id_retrospectiva limit 1", nativeQuery = true)
+ List<RetrospectivaEntity> findRetroMaisRecente();
+
 
 
 }

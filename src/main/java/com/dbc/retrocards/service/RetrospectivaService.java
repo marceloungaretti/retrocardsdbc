@@ -78,6 +78,17 @@ public class RetrospectivaService {
                 .collect(Collectors.toList());
     }
 
+    public List<RetrospectivaDTO> getRetroMaisRecente() throws RegraDeNegocioException {
+        return repository.findRetroMaisRecente().stream()
+                .map(retrospectivaEntity -> {
+                    RetrospectivaDTO retrospectivaDTO = objectMapper.convertValue(retrospectivaEntity, RetrospectivaDTO.class);
+                    retrospectivaDTO.setSprintEntity(retrospectivaEntity.getSprintEntity());
+                    retrospectivaDTO.setItemDeRetrospectivaDTO(retrospectivaEntity.getItens().stream().map(retro -> objectMapper.convertValue(retro, ItemDeRetrospectivaDTO.class)).collect(Collectors.toList()));
+                    return retrospectivaDTO;
+                })
+                .collect(Collectors.toList());
+    }
+
     public RetrospectivaDTO update(Integer id, RetrospectivaCreateDTO retrospectivaCreateDTO) throws RegraDeNegocioException {
         findById(id);
         RetrospectivaEntity entity = objectMapper.convertValue(retrospectivaCreateDTO, RetrospectivaEntity.class);
