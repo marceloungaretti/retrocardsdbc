@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
  public  interface RetrospectivaRepository extends JpaRepository<RetrospectivaEntity, Integer> {
- @Query(value = "SELECT * from retrospectiva WHERE id_sprint = :id", nativeQuery = true)
+ @Query(value = "SELECT * from retrospectiva WHERE id_sprint = :id order by data asc,id_retrospectiva", nativeQuery = true)
  List<RetrospectivaEntity> findByIdSprint(Integer id);
 
  @Query(value = "SELECT * from retrospectiva WHERE id_retrospectiva = :id", nativeQuery = true)
