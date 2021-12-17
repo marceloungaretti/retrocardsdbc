@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface KudoBoxRepository extends JpaRepository<KudoBoxEntity, Integer> {
-    @Query(value = "SELECT * from kudobox WHERE id_sprint = :id", nativeQuery = true)
+    @Query(value = "SELECT * from kudobox WHERE id_sprint = :id order by data_leitura asc", nativeQuery = true)
     List<KudoBoxEntity> findBoxByIdSprint(Integer id);
 }
