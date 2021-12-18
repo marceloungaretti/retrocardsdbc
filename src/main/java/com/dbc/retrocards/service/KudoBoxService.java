@@ -48,10 +48,10 @@ public class KudoBoxService {
         return kudoBoxRepository.findBoxAndamento()
                 .stream()
                 .map(kudobox -> {
-                        KudoBoxDTO kudoBoxDTO  = objectMapper.convertValue(kudobox, KudoBoxDTO.class);
-                    kudoBoxDTO.setSprintDTO(objectMapper.convertValue(kudobox.getSprintEntity(),SprintDTO.class));
-        return kudoBoxDTO;
-    }).collect(Collectors.toList());
+                    KudoBoxDTO kudoBoxDTO = objectMapper.convertValue(kudobox, KudoBoxDTO.class);
+                    kudoBoxDTO.setSprintDTO(objectMapper.convertValue(kudobox.getSprintEntity(), SprintDTO.class));
+                    return kudoBoxDTO;
+                }).collect(Collectors.toList());
     }
 
     public KudoBoxDTO getById(Integer id) throws RegraDeNegocioException {

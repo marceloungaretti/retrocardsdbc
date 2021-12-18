@@ -102,7 +102,18 @@ public class KudoCardController {
             @ApiResponse(code = 500, message = "Foi gerada um exceção")
     })
     @GetMapping("/list-por-box")
-    public List<KudoCardDTO> listarPorBox (@PathVariable("idKudoBox") Integer idKudoBox) throws RegraDeNegocioException {
+    public List<KudoCardDTO> listarPorBox (@RequestParam("idKudoBox") Integer idKudoBox) throws RegraDeNegocioException {
         return kudoCardService.listarPorBox(idKudoBox);
+    }
+
+    @ApiOperation(value = "Lista todos Kudo Cards com status encerrado")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retornou a lista com sucesso"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 500, message = "Foi gerada um exceção")
+    })
+    @GetMapping("/find-by-sprint")
+    public List<KudoCardDTO> findBySprint () throws RegraDeNegocioException {
+        return kudoCardService.findBySprint();
     }
 }

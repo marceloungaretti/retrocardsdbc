@@ -1,9 +1,6 @@
 package com.dbc.retrocards.service;
 
-import com.dbc.retrocards.dto.KudoBoxDTO;
-import com.dbc.retrocards.dto.KudoCardCreateDTO;
-import com.dbc.retrocards.dto.KudoCardDTO;
-import com.dbc.retrocards.dto.ListarKudoCardDTO;
+import com.dbc.retrocards.dto.*;
 import com.dbc.retrocards.entity.KudoCardEntity;
 import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
@@ -85,6 +82,18 @@ public class KudoCardService {
         return kudoCardRepository.findByIdBox(idKudoBox).stream()
                 .map(card -> {
                     KudoCardDTO cardDTO = objectMapper.convertValue(card, KudoCardDTO.class);
+                    cardDTO.setKudoBoxDTO(objectMapper.convertValue(card.getKudoBox(),KudoBoxDTO.class));
+                    return cardDTO;
+                })
+                .collect(Collectors.toList());
+    }
+
+    public List<KudoCardDTO> findBySprint() throws RegraDeNegocioException {
+        return kudoCardRepository.findBySprint().stream()
+                .map(card -> {
+                    KudoCardDTO cardDTO = objectMapper.convertValue(card, KudoCardDTO.class);
+                    cardDTO.setKudoBoxDTO(objectMapper.convertValue(card.getKudoBox(),KudoBoxDTO.class));
+                    cardDTO.setSprintDTO(objectMapper.convertValue(card.getKudoBox().getSprintEntity(),SprintDTO.class));
                     return cardDTO;
                 })
                 .collect(Collectors.toList());
