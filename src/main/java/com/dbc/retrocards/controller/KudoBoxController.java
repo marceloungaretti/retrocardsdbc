@@ -36,16 +36,16 @@ public class KudoBoxController {
         return kudoBoxDTO;
     }
 
-    @GetMapping
-    @ApiOperation(value = "Retorna uma lista de Kudo Boxes")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna a lista de Kudo Boxes."),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção.")
-    })
-    public List<KudoBoxDTO> list() {
-        return kudoBoxService.list();
-    }
+//    @GetMapping
+//    @ApiOperation(value = "Retorna uma lista de Kudo Boxes")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Retorna a lista de Kudo Boxes."),
+//            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
+//            @ApiResponse(code = 500, message = "Foi gerada uma exceção.")
+//    })
+//    public List<KudoBoxDTO> list() {
+//        return kudoBoxService.list();
+//    }
 
     @GetMapping("/{idKudoBox}")
     @ApiOperation(value = "Retorna um Kudo Box pelo seu ID")
@@ -76,5 +76,15 @@ public class KudoBoxController {
     })
     public List<KudoBoxDTO> listBoxByIdSprint(@Valid @RequestParam("idSprint") Integer id) throws RegraDeNegocioException {
         return kudoBoxService.getBoxByIdSprint(id);
+    }
+
+    @GetMapping
+    @ApiOperation(value = "Retorna todas Kudo Box com status em andamento")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retornou os Kudo Boxes com sucesso."),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção.")
+    })
+    public List<KudoBoxDTO> getBoxEmAndamento() throws RegraDeNegocioException {
+        return kudoBoxService.getBoxEmAndamento();
     }
 }

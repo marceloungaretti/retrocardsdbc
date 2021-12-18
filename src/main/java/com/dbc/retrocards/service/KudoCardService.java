@@ -44,6 +44,7 @@ public class KudoCardService {
                 .stream()
                 .map(kudocard -> objectMapper.convertValue(kudocard, KudoCardDTO.class))
 
+
                 .collect(Collectors.toList());
     }
 
