@@ -3,7 +3,6 @@ package com.dbc.retrocards.controller;
 import com.dbc.retrocards.dto.KudoCardCreateDTO;
 import com.dbc.retrocards.dto.KudoCardDTO;
 import com.dbc.retrocards.dto.ListarKudoCardDTO;
-import com.dbc.retrocards.dto.ListarSprintDTO;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.service.KudoCardService;
 import io.swagger.annotations.ApiOperation;
@@ -42,7 +41,7 @@ public class KudoCardController {
     @ApiOperation(value = "Retorna uma lista de Kudo Cards")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a lista de Kudo Cards"),
-            @ApiResponse(code = 403, message = "Você mão tem permissão para acessar este recurso"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
     @GetMapping
@@ -74,7 +73,7 @@ public class KudoCardController {
     }
 
 
-    @ApiOperation(value = "Deleta um Kudo Card pelo sey ID")
+    @ApiOperation(value = "Deleta um Kudo Card pelo seu ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna o Kudo Card deletado com sucesso"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
@@ -85,13 +84,25 @@ public class KudoCardController {
         kudoCardService.delete(idKudoCard);
     }
 
+    @ApiOperation(value = "Lista um Kudo Card ")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna o Kudo Card listado com sucesso"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 500, message = "Foi gerada um exceção")
+    })
     @GetMapping("/listar-kudo-card")
     public List<ListarKudoCardDTO> listarKudoCard() {
         return kudoCardService.listar();
     }
 
+    @ApiOperation(value = "Lista um Kudo Card pelo ID do kudobox")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna o Kudo Card com sucesso"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 500, message = "Foi gerada um exceção")
+    })
     @GetMapping("/list-por-box")
-    public List<KudoCardDTO> listarPorBox(Integer id) throws RegraDeNegocioException {
-        return kudoCardService.listarPorBox(id);
+    public List<KudoCardDTO> listarPorBox (@PathVariable("idKudoBox") Integer idKudoBox) throws RegraDeNegocioException {
+        return kudoCardService.listarPorBox(idKudoBox);
     }
 }

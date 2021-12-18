@@ -40,7 +40,7 @@ public class KudoBoxController {
     @ApiOperation(value = "Retorna uma lista de Kudo Boxes")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a lista de Kudo Boxes."),
-            @ApiResponse(code = 403, message = "Você mão tem permissão para acessar este recurso."),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção.")
     })
     public List<KudoBoxDTO> list() {
@@ -65,28 +65,6 @@ public class KudoBoxController {
     })
     public KudoBoxDTO updateStatus(@PathVariable("idKudoBox") Integer idKudoBox, @RequestParam @Valid StatusKudoBoxEntity status) throws RegraDeNegocioException {
         return kudoBoxService.updateStatus(idKudoBox, status);
-    }
-
-//    @PutMapping("/{idKudoBox}")
-//    @ApiOperation(value = "Atualiza um Kudo Box pelo seu ID")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Retorna o Kudo Box atualizado com sucesso"),
-//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
-//    })
-//    public KudoBoxDTO update(@PathVariable("idKudoBox") Integer idKudoBox,
-//                             @RequestBody @Valid KudoBoxCreateDTO kudoBoxCreateDTO) throws Exception {
-//        return kudoBoxService.update(idKudoBox, kudoBoxCreateDTO);
-//    }
-
-    @DeleteMapping("/{idKudoBox}")
-    @ApiOperation(value = "Deleta um Kudo Box")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Kudo Box deletado com sucesso."),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção.")
-    })
-    public void delete(@PathVariable("idKudoBox") Integer idKudoBox) throws RegraDeNegocioException {
-        kudoBoxService.delete(idKudoBox);
     }
 
     @GetMapping("/id-sprint")

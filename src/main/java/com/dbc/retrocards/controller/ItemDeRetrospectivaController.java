@@ -2,8 +2,6 @@ package com.dbc.retrocards.controller;
 
 import com.dbc.retrocards.dto.ItemDeRetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.ItemDeRetrospectivaDTO;
-import com.dbc.retrocards.dto.KudoCardCreateDTO;
-import com.dbc.retrocards.dto.KudoCardDTO;
 import com.dbc.retrocards.service.ItemDeRetrospectivaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -68,12 +66,12 @@ public class ItemDeRetrospectivaController {
     })
     @PutMapping("/{idItem}")
     public ItemDeRetrospectivaDTO update(@PathVariable("idItem") Integer idItem,
-                              @RequestBody @Valid ItemDeRetrospectivaCreateDTO itemDeRetrospectivaCreateDTO) throws Exception {
+                                         @RequestBody @Valid ItemDeRetrospectivaCreateDTO itemDeRetrospectivaCreateDTO) throws Exception {
         return itemDeRetrospectivaService.update(idItem, itemDeRetrospectivaCreateDTO);
     }
 
 
-    @ApiOperation(value = "Deleta um Item de Retrospectiva pelo sey ID")
+    @ApiOperation(value = "Deleta um Item de Retrospectiva pelo seu ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna o Item de Retrospectiva deletado com sucesso"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),

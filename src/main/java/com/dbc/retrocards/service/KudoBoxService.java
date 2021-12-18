@@ -4,7 +4,6 @@ import com.dbc.retrocards.dto.*;
 import com.dbc.retrocards.entity.*;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.KudoBoxRepository;
-import com.dbc.retrocards.repository.KudoCardRepository;
 import com.dbc.retrocards.repository.SprintRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +26,7 @@ public class KudoBoxService {
         return entity;
     }
 
-    public KudoBoxDTO create(Integer id , KudoBoxCreateDTO kudoBoxCreateDTO) throws RegraDeNegocioException {
+    public KudoBoxDTO create(Integer id, KudoBoxCreateDTO kudoBoxCreateDTO) throws RegraDeNegocioException {
         KudoBoxEntity entity = objectMapper.convertValue(kudoBoxCreateDTO, KudoBoxEntity.class);
         entity.setSprintEntity(sprintRepository.findById(id)
                 .orElseThrow(() -> new RegraDeNegocioException("KudoBox não encontrada")));
@@ -51,7 +50,7 @@ public class KudoBoxService {
         return dto;
     }
 
-    public KudoBoxDTO update(Integer id, KudoBoxCreateDTO kudoBoxCreateDTO) throws RegraDeNegocioException{
+    public KudoBoxDTO update(Integer id, KudoBoxCreateDTO kudoBoxCreateDTO) throws RegraDeNegocioException {
         findById(id);
         KudoBoxEntity entity = objectMapper.convertValue(kudoBoxCreateDTO, KudoBoxEntity.class);
         entity.setIdKudoBox(id);
@@ -60,21 +59,6 @@ public class KudoBoxService {
         return dto;
     }
 
-//    public RetrospectivaDTO updateStatus(Integer idRetrospectiva, StatusRetrospectivaEntity status) throws RegraDeNegocioException {
-//        Optional<RetrospectivaEntity> entity = repository.findById(idRetrospectiva);
-//        SprintEntity sprintEntity = entity.get().getSprintEntity();
-//        for (RetrospectivaEntity entity2 : sprintEntity.getRetrospectivaEntityList()) {
-//            if (entity2.getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
-//                if (status == StatusRetrospectivaEntity.EM_ANDAMENTO) {
-//                    throw new RegraDeNegocioException("Não é possivel iniciar. Status em andamento em uso");
-//                }
-//            }
-//        }
-//        RetrospectivaEntity entity2 = findById(idRetrospectiva);
-//        entity2.setStatusRetrospectivaEntity(status);
-//        RetrospectivaEntity update = repository.save(entity2);
-//        return objectMapper.convertValue(update, RetrospectivaDTO.class);
-//    }
 
     public KudoBoxDTO updateStatus(Integer idKudoBox, StatusKudoBoxEntity status) throws RegraDeNegocioException {
         Optional<KudoBoxEntity> entity = kudoBoxRepository.findById(idKudoBox);
@@ -82,7 +66,7 @@ public class KudoBoxService {
         for (KudoBoxEntity entity2 : sprintEntity.getKudoBoxEntityList()) {
             if (entity2.getStatusKudoBoxEntity() == StatusKudoBoxEntity.EM_ANDAMENTO) {
                 if (status == StatusKudoBoxEntity.EM_ANDAMENTO) {
-                    throw new RegraDeNegocioException("Não é possivel iniciar. Status EM ANDMENTO impossibilita a mudança");
+                    throw new RegraDeNegocioException("Não é possivel iniciar. Status EM ANDAMENTO impossibilita a mudança");
                 }
             }
         }
@@ -92,16 +76,10 @@ public class KudoBoxService {
         return objectMapper.convertValue(update, KudoBoxDTO.class);
     }
 
-    public void delete(Integer id) throws RegraDeNegocioException {
-        KudoBoxEntity entity = findById(id);
-        kudoBoxRepository.delete(entity);
-    }
-
     public List<KudoBoxDTO> getBoxByIdSprint(Integer id) throws RegraDeNegocioException {
         return kudoBoxRepository.findBoxByIdSprint(id).stream()
                 .map(kudoBoxEntity -> {
                     KudoBoxDTO kudoBoxDTO = objectMapper.convertValue(kudoBoxEntity, KudoBoxDTO.class);
-//                    kudoBoxDTO.(retrospectivaEntity.getItens().stream().map(retro -> objectMapper.convertValue(retro, ItemDeRetrospectivaDTO.class)).collect(Collectors.toList()));
                     return kudoBoxDTO;
                 })
                 .collect(Collectors.toList());

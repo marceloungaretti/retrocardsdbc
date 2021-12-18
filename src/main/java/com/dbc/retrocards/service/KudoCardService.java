@@ -4,7 +4,6 @@ import com.dbc.retrocards.dto.KudoBoxDTO;
 import com.dbc.retrocards.dto.KudoCardCreateDTO;
 import com.dbc.retrocards.dto.KudoCardDTO;
 import com.dbc.retrocards.dto.ListarKudoCardDTO;
-import com.dbc.retrocards.entity.KudoBoxEntity;
 import com.dbc.retrocards.entity.KudoCardEntity;
 import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
@@ -13,6 +12,7 @@ import com.dbc.retrocards.repository.KudoCardRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,12 +74,13 @@ public class KudoCardService {
     public List<ListarKudoCardDTO> listar() {
         return kudoCardRepository.listarKudoCardPorDataAsc()
                 .stream()
-                .map(kudoCard -> {ListarKudoCardDTO listarKudoCardDTO = objectMapper.convertValue(kudoCard, ListarKudoCardDTO.class);
+                .map(kudoCard -> {
+                    ListarKudoCardDTO listarKudoCardDTO = objectMapper.convertValue(kudoCard, ListarKudoCardDTO.class);
                     return listarKudoCardDTO;
                 }).collect(Collectors.toList());
     }
 
-    public List<KudoCardDTO> listarPorBox(Integer idKudoBox) throws RegraDeNegocioException{
+    public List<KudoCardDTO> listarPorBox(Integer idKudoBox) throws RegraDeNegocioException {
         return kudoCardRepository.findByIdBox(idKudoBox).stream()
                 .map(card -> {
                     KudoCardDTO cardDTO = objectMapper.convertValue(card, KudoCardDTO.class);
@@ -88,13 +89,4 @@ public class KudoCardService {
                 .collect(Collectors.toList());
     }
 
-//    public List<ItemDeRetrospectivaDTO> getByIdRetro(Integer id) throws RegraDeNegocioException {
-//        return itemDeRetrospectivaRepository.findByIdRetro(id).stream()
-//                .map(retrospectivaEntity -> {
-//                    ItemDeRetrospectivaDTO itemDeRetrospectivaDTO = objectMapper.convertValue(retrospectivaEntity, ItemDeRetrospectivaDTO.class);
-////                    itemDeRetrospectivaDTO.setRetrospectivaDTO(retrospectivaEntity.getItens().stream().map(retro -> objectMapper.convertValue(retro, ItemDeRetrospectivaDTO.class)).collect(Collectors.toList()));
-//                    return itemDeRetrospectivaDTO;
-//                })
-//                .collect(Collectors.toList());
-//    }
 }

@@ -2,11 +2,7 @@ package com.dbc.retrocards.service;
 
 import com.dbc.retrocards.dto.EmailCreateDTO;
 import com.dbc.retrocards.dto.EmailDTO;
-import com.dbc.retrocards.dto.RetrospectivaCreateDTO;
-import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.EmailEntity;
-import com.dbc.retrocards.entity.RetrospectivaEntity;
-import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.EmailRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -28,7 +28,7 @@ public class ItemDeRetrospectivaService {
         return entity;
     }
 
-    public ItemDeRetrospectivaDTO create(Integer id, ItemDeRetrospectivaCreateDTO itemDeRetrospectivaCreateDTO) throws RegraDeNegocioException{
+    public ItemDeRetrospectivaDTO create(Integer id, ItemDeRetrospectivaCreateDTO itemDeRetrospectivaCreateDTO) throws RegraDeNegocioException {
         ItemDeRetrospectivaEntity entity = objectMapper.convertValue(itemDeRetrospectivaCreateDTO, ItemDeRetrospectivaEntity.class);
         entity.setRetrospectivaEntity(retrospectivaRepository.findById(id)
                 .orElseThrow(() -> new RegraDeNegocioException("Retrospectiva não encontrada")));
@@ -68,7 +68,6 @@ public class ItemDeRetrospectivaService {
         ItemDeRetrospectivaDTO dto = objectMapper.convertValue(update, ItemDeRetrospectivaDTO.class);
         return dto;
     }
-
 
 
     public void delete(Integer id) throws RegraDeNegocioException {

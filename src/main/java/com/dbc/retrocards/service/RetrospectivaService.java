@@ -5,7 +5,6 @@ import com.dbc.retrocards.dto.RetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
 import com.dbc.retrocards.entity.SprintEntity;
-import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.RetrospectivaRepository;
@@ -50,13 +49,6 @@ public class RetrospectivaService {
 
     }
 
-//    public List<ItemDeRetrospectivaDTO> getById(Integer idRetrospectiva) throws RegraDeNegocioException {
-//        return repository.findByIdRetro(idRetrospectiva).stream().map(item ->{
-//            ItemDeRetrospectivaDTO itemDeRetrospectivaDTO = objectMapper.convertValue(item, ItemDeRetrospectivaDTO.class);
-//
-//            return itemDeRetrospectivaDTO;
-//        }).collect(Collectors.toList());
-//    }
 
     public List<RetrospectivaDTO> getByIdSprint(Integer id) throws RegraDeNegocioException {
         return repository.findByIdSprint(id).stream()
@@ -92,7 +84,6 @@ public class RetrospectivaService {
     public RetrospectivaDTO update(Integer id, RetrospectivaCreateDTO retrospectivaCreateDTO) throws RegraDeNegocioException {
         findById(id);
         RetrospectivaEntity entity = objectMapper.convertValue(retrospectivaCreateDTO, RetrospectivaEntity.class);
-//        entity.setIdTitulo(id);
         RetrospectivaEntity update = repository.save(entity);
         RetrospectivaDTO dto = objectMapper.convertValue(update, RetrospectivaDTO.class);
         return dto;
@@ -104,7 +95,7 @@ public class RetrospectivaService {
         for (RetrospectivaEntity entity2 : sprintEntity.getRetrospectivaEntityList()) {
             if (entity2.getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
                 if (status == StatusRetrospectivaEntity.EM_ANDAMENTO) {
-                    throw new RegraDeNegocioException("Não é possivel iniciar. Status EM ANDMENTO impossibilita a mudança.");
+                    throw new RegraDeNegocioException("Não é possivel iniciar. Status EM ANDAMENTO impossibilita a mudança.");
                 }
             }
         }
@@ -114,12 +105,6 @@ public class RetrospectivaService {
         return objectMapper.convertValue(update, RetrospectivaDTO.class);
     }
 
-
-//    if (entity.getKudoBox().getStatusKudoBoxEntity() == StatusKudoBoxEntity.EM_ANDAMENTO) {
-//        kudoCardRepository.delete(entity);
-//    } else {
-//        throw new RegraDeNegocioException("Não é possivel deletar. Status Incorreto.");
-//    }
 
     public void delete(Integer idRetrospectiva) throws RegraDeNegocioException {
         RetrospectivaEntity entity = findById(idRetrospectiva);

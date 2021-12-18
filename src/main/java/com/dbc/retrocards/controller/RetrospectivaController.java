@@ -29,7 +29,7 @@ public class RetrospectivaController {
     @ApiOperation(value = "Cria uma nova retrospectiva")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retrospectiva criada com sucesso."),
-            @ApiResponse(code = 400, message = "Algum dado inconsistente."),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção no sistema.")
     })
     public RetrospectivaCreateDTO create(Integer id, @RequestBody @Valid RetrospectivaCreateDTO retrospectivaCreateDTO) throws RegraDeNegocioException {
@@ -45,22 +45,6 @@ public class RetrospectivaController {
     public List<RetrospectivaDTO> list() {
         return retrospectivaService.list();
     }
-
-//    @GetMapping("/{idRetrospectiva}")
-//    public List<ItemDeRetrospectivaDTO> getById(@RequestParam("idTitulo") Integer idRetrospectiva) throws Exception {
-//        return retrospectivaService.getById(idRetrospectiva);
-//    }
-
-//    @ApiOperation(value = "Atualiza uma Retrospectiva pelo seu ID")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Retorna retrospectiva atualizado com sucesso"),
-//            @ApiResponse(code = 500, message = "Foi gerada uma exceção")
-//    })
-//    @PutMapping("/{idRetrospectiva}")
-//    public RetrospectivaDTO update(@PathVariable("idRetrospectiva") Integer id,
-//                                   @RequestBody @Valid RetrospectivaCreateDTO retroCreateDTO) throws Exception {
-//        return retrospectivaService.update(id, retroCreateDTO);
-//    }
 
     @PutMapping("/{idRetrospectiva}/status")
     public RetrospectivaDTO updateStatus(@PathVariable("idRetrospectiva") Integer idRetrospectiva,
@@ -91,7 +75,7 @@ public class RetrospectivaController {
     }
 
     @GetMapping("/listar-por-id-retro")
-    @ApiOperation(value = "Listar uma retrospectiva pelo ID da mesma")
+    @ApiOperation(value = "Listar uma retrospectiva pelo ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retrospectiva  listada com sucesso."),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
@@ -100,7 +84,15 @@ public class RetrospectivaController {
     public List<RetrospectivaDTO> listByIdRetro(@Valid @RequestParam("idRetro") Integer id) throws RegraDeNegocioException {
         return retrospectivaService.getByIdRetro(id);
     }
-    @GetMapping("/findo-retro-mais-recente")
+
+
+    @ApiOperation(value = "Listar uma retrospectiva por data mais recente")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retrospectiva  listada com sucesso."),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
+            @ApiResponse(code = 500, message = "Foi gerada um exceção.")
+    })
+    @GetMapping("/find-retro-mais-recente")
     public List<RetrospectivaDTO> findRetroMaisRecente() throws RegraDeNegocioException {
         return retrospectivaService.getRetroMaisRecente();
     }
