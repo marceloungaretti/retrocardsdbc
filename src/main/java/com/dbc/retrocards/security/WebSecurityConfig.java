@@ -35,8 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/auth").permitAll()
                 .antMatchers(HttpMethod.POST,"/Sprint", "/retrospectiva", "/kudobox").hasRole("FACILITADOR")
-                .antMatchers(HttpMethod.POST, "/itemderetrospectiva", "/kudocards", "/kudobox").hasRole("MEMBRO")
-                .antMatchers(HttpMethod.DELETE,"/itemderetrospectiva", "/kudocards", "/kudobox").hasRole("MEMBRO")
+                .antMatchers(HttpMethod.POST, "/itemderetrospectiva", "/kudocards").hasRole("MEMBRO")
+                .antMatchers(HttpMethod.DELETE,"/itemderetrospectiva", "/kudocards").hasRole("MEMBRO")
                 .antMatchers(HttpMethod.GET, "/**").hasAnyRole("FACILITADOR", "MEMBRO")
 //                .antMatchers("/**").hasRole("FACILITADOR") //ROLE_ADMIN
 //                .antMatchers("/**").hasRole("FACILITADOR") //ROLE_ADMIN
