@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -93,5 +95,24 @@ public class KudoBoxService {
                     return kudoBoxDTO;
                 })
                 .collect(Collectors.toList());
+    }
+
+    public List<KudoBoxDTO> getByData() throws RegraDeNegocioException {
+        List<KudoBoxEntity> todosBoxes = kudoBoxRepository.findAll();
+        for(KudoBoxEntity box : todosBoxes) {
+            if (box.getStatusKudoBoxEntity().equals(StatusKudoBoxEntity.EM_ANDAMENTO)) {
+                if (box.getDataLeitura().isBefore(LocalDate.now()) || box.getDataLeitura().isEqual(LocalDate.now())) {
+                    box.setStatusKudoBoxEntity(StatusKudoBoxEntity.ENCERRADO);
+                    kudoBoxRepository.save(box);
+                }
+            }
+        }
+        List<KudoBoxDTO> listaDtos = new ArrayList<>();
+        for(KudoBoxEntity box : todosBoxes){
+            KudoBoxDTO dto = objectMapper.convertValue(box, KudoBoxDTO.class);
+            listaDtos.add(dto);
+        }
+
+        return listaDtos;
     }
 }

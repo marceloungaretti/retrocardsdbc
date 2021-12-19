@@ -87,4 +87,13 @@ public class KudoBoxController {
     public List<KudoBoxDTO> getBoxEmAndamento() throws RegraDeNegocioException {
         return kudoBoxService.getBoxEmAndamento();
     }
+    @GetMapping("/listar-atualizando-status")
+    @ApiOperation(value = "Atualizar o status do KudoBox para encerrado caso data passada")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Executado com sucesso."),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção.")
+    })
+    public List<KudoBoxDTO> ListarAtualizandoStatus() throws RegraDeNegocioException {
+        return kudoBoxService.getByData();
+    }
 }
