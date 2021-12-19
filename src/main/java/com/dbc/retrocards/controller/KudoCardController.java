@@ -116,4 +116,15 @@ public class KudoCardController {
     public List<KudoCardDTO> findBySprint () throws RegraDeNegocioException {
         return kudoCardService.findBySprint();
     }
+
+    @ApiOperation(value = "Lista os Kudo Cards com status encerrado pelo id da sprint")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retornou a lista com sucesso"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 500, message = "Foi gerada um exceção")
+    })
+    @GetMapping("/find-by-id-sprint")
+    public List<KudoCardDTO> findByIdSprint (@RequestParam Integer idSprint) throws RegraDeNegocioException {
+        return kudoCardService.findByIdSprint(idSprint);
+    }
 }

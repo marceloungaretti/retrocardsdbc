@@ -22,5 +22,11 @@ public interface KudoCardRepository extends JpaRepository<KudoCardEntity, Intege
             "JOIN kudobox k2 ON (k.id_kudobox = k2.id_kudobox) " +
             "join sprint s ON(k2.id_sprint = s.id_sprint) where status = '2' order by s.id_sprint ", nativeQuery = true)
     List<KudoCardEntity> findBySprint();
+
+    @Query(value = "select id_kudocard,de,para,data_criacao,descricao,k.titulo,s.id_sprint,k2.status,k2.id_kudobox " +
+            "from kudocard k " +
+            "JOIN kudobox k2 ON (k.id_kudobox = k2.id_kudobox) " +
+            "join sprint s ON(k2.id_sprint = s.id_sprint) where s.id_sprint = :id and k2.status = '2' ", nativeQuery = true)
+    List<KudoCardEntity> findByIdSprint(Integer id);
 }
 

@@ -99,4 +99,15 @@ public class KudoCardService {
                 .collect(Collectors.toList());
     }
 
+    public List<KudoCardDTO> findByIdSprint(Integer idSprint) throws RegraDeNegocioException {
+        return kudoCardRepository.findByIdSprint(idSprint).stream()
+                .map(card -> {
+                    KudoCardDTO cardDTO = objectMapper.convertValue(card, KudoCardDTO.class);
+                    cardDTO.setKudoBoxDTO(objectMapper.convertValue(card.getKudoBox(),KudoBoxDTO.class));
+                    cardDTO.setSprintDTO(objectMapper.convertValue(card.getKudoBox().getSprintEntity(),SprintDTO.class));
+                    return cardDTO;
+                })
+                .collect(Collectors.toList());
+    }
+
 }
