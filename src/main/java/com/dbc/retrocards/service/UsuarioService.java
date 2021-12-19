@@ -10,6 +10,7 @@ import com.dbc.retrocards.repository.GrupoRepository;
 import com.dbc.retrocards.repository.UsuarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -105,5 +106,9 @@ public class UsuarioService {
         return usuarioRepository.findByLogin(login);
     }
 
-
+    public UsuarioDTO retrieveUser() {
+        int idUsuario = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+        Optional<UsuarioEntity> usuario = usuarioRepository.findById(idUsuario);
+        return objectMapper.convertValue(usuario, UsuarioDTO.class);
+    }
 }

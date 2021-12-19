@@ -35,8 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/auth").permitAll()
                 .antMatchers(HttpMethod.POST,"/sprint", "/retrospectiva", "/kudobox").hasRole("FACILITADOR")
-                .antMatchers(HttpMethod.POST, "/itemderetrospectiva", "/kudocards").hasRole("MEMBRO")
-                .antMatchers(HttpMethod.DELETE,"/itemderetrospectiva", "/kudocards").hasRole("MEMBRO")
+                .antMatchers(HttpMethod.POST, "/itemderetrospectiva", "/kudocard").hasRole("MEMBRO")
+                .antMatchers(HttpMethod.DELETE,"/itemderetrospectiva", "/kudocard").hasRole("MEMBRO")
                 .antMatchers(HttpMethod.GET, "/**").hasAnyRole("FACILITADOR", "MEMBRO")
 //                 colocar o put sem setar ngm
 //                .antMatchers("/**").hasRole("FACILITADOR") //ROLE_ADMIN

@@ -19,6 +19,7 @@ public class KudoCardService {
     private final KudoCardRepository kudoCardRepository;
     private final ObjectMapper objectMapper;
     private final KudoBoxRepository kudoBoxRepository;
+    private final UsuarioService usuarioService;
 
     private KudoCardEntity findById(Integer id) throws RegraDeNegocioException {
         KudoCardEntity entity = kudoCardRepository.findById(id)
@@ -28,6 +29,7 @@ public class KudoCardService {
 
     public KudoCardDTO create(Integer id, KudoCardCreateDTO kudoCardCreateDTO) throws RegraDeNegocioException {
         KudoCardEntity entity = objectMapper.convertValue(kudoCardCreateDTO, KudoCardEntity.class);
+        entity.setIdCriador(usuarioService.retrieveUser().getIdUsuario());
         entity.setKudoBox(kudoBoxRepository.findById(id)
                 .orElseThrow(() -> new RegraDeNegocioException("KudoBox não encontrada")));
         KudoCardEntity kudoCardCriado = kudoCardRepository.save(entity);
@@ -62,10 +64,14 @@ public class KudoCardService {
 
     public void delete(Integer id) throws RegraDeNegocioException {
         KudoCardEntity entity = findById(id);
-        if (entity.getKudoBox().getStatusKudoBoxEntity() == StatusKudoBoxEntity.EM_ANDAMENTO) {
-            kudoCardRepository.delete(entity);
+        if (entity.getIdCriador().equals(usuarioService.retrieveUser().getIdUsuario())) {
+            if (entity.getKudoBox().getStatusKudoBoxEntity() == StatusKudoBoxEntity.EM_ANDAMENTO) {
+                kudoCardRepository.delete(entity);
+            } else {
+                throw new RegraDeNegocioException("Não é possivel deletar. Status Incorreto.");
+            }
         } else {
-            throw new RegraDeNegocioException("Não é possivel deletar. Status Incorreto.");
+            throw new RegraDeNegocioException("Você não é o criador deste kudo card");
         }
     }
 

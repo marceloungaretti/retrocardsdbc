@@ -4,6 +4,8 @@ import com.dbc.retrocards.dto.ItemDeRetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.ItemDeRetrospectivaDTO;
 import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.ItemDeRetrospectivaEntity;
+import com.dbc.retrocards.entity.KudoCardEntity;
+import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.ItemDeRetrospectivaRepository;
@@ -21,6 +23,7 @@ public class ItemDeRetrospectivaService {
     private final ItemDeRetrospectivaRepository itemDeRetrospectivaRepository;
     private final ObjectMapper objectMapper;
     private final RetrospectivaRepository retrospectivaRepository;
+    private final UsuarioService usuarioService;
 
     private ItemDeRetrospectivaEntity findById(Integer id) throws RegraDeNegocioException {
         ItemDeRetrospectivaEntity entity = itemDeRetrospectivaRepository.findById(id)
@@ -30,6 +33,7 @@ public class ItemDeRetrospectivaService {
 
     public ItemDeRetrospectivaDTO create(Integer id, ItemDeRetrospectivaCreateDTO itemDeRetrospectivaCreateDTO) throws RegraDeNegocioException {
         ItemDeRetrospectivaEntity entity = objectMapper.convertValue(itemDeRetrospectivaCreateDTO, ItemDeRetrospectivaEntity.class);
+        entity.setIdCriador(usuarioService.retrieveUser().getIdUsuario());
         entity.setRetrospectivaEntity(retrospectivaRepository.findById(id)
                 .orElseThrow(() -> new RegraDeNegocioException("Retrospectiva não encontrada")));
         ItemDeRetrospectivaEntity itemCriado = itemDeRetrospectivaRepository.save(entity);
@@ -72,10 +76,14 @@ public class ItemDeRetrospectivaService {
 
     public void delete(Integer id) throws RegraDeNegocioException {
         ItemDeRetrospectivaEntity entity = findById(id);
-        if (entity.getRetrospectivaEntity().getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
-            itemDeRetrospectivaRepository.delete(entity);
+        if (entity.getIdCriador().equals(usuarioService.retrieveUser().getIdUsuario())) {
+            if (entity.getRetrospectivaEntity().getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
+                itemDeRetrospectivaRepository.delete(entity);
+            } else {
+                throw new RegraDeNegocioException("Não é possivel deletar. Status Incorreto.");
+            }
         } else {
-            throw new RegraDeNegocioException("Não é possivel deletar. Status Incorreto.");
+            throw new RegraDeNegocioException("Você não é o criador deste item");
         }
     }
 

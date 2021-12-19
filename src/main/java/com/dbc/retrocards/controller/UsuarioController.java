@@ -86,4 +86,16 @@ public class UsuarioController {
         usuarioService.delete(id);
         log.info("Usuario deletado com sucesso");
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Recupera cadastrador"),
+            @ApiResponse(code = 400, message = "Você não tem permissão para acessar esse recurso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção no sistema")
+    })
+    @ApiOperation("Recupera o usuário")
+    @GetMapping("/recuperar")
+    public UsuarioDTO retrieveUser(){
+        return usuarioService.retrieveUser();
+    }
+
 }
