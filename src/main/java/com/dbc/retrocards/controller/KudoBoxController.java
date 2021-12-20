@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -96,4 +97,6 @@ public class KudoBoxController {
     public List<KudoBoxDTO> ListarAtualizandoStatus() throws RegraDeNegocioException {
         return kudoBoxService.getByData();
     }
+
+
 }

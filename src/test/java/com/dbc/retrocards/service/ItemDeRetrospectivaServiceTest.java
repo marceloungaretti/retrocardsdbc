@@ -2,8 +2,6 @@ package com.dbc.retrocards.service;
 
 import com.dbc.retrocards.dto.ItemDeRetrospectivaCreateDTO;
 import com.dbc.retrocards.dto.ItemDeRetrospectivaDTO;
-import com.dbc.retrocards.dto.KudoCardCreateDTO;
-import com.dbc.retrocards.dto.KudoCardDTO;
 import com.dbc.retrocards.entity.*;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.ItemDeRetrospectivaRepository;
@@ -15,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;

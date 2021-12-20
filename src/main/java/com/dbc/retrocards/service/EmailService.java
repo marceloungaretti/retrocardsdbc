@@ -2,9 +2,12 @@ package com.dbc.retrocards.service;
 
 import com.dbc.retrocards.dto.EmailCreateDTO;
 import com.dbc.retrocards.dto.EmailDTO;
+import com.dbc.retrocards.dto.RetrospectivaDTO;
 import com.dbc.retrocards.entity.EmailEntity;
+import com.dbc.retrocards.entity.RetrospectivaEntity;
 import com.dbc.retrocards.exceptions.RegraDeNegocioException;
 import com.dbc.retrocards.repository.EmailRepository;
+import com.dbc.retrocards.repository.RetrospectivaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import freemarker.template.Template;
@@ -35,7 +38,7 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String remetente;
     private final Configuration configuration;
-
+    private final RetrospectivaRepository retrospectivaRepository;
 
     public EmailDTO create(EmailCreateDTO emailCreateDTO) throws RegraDeNegocioException, MessagingException, TemplateException, IOException {
         EmailEntity entity = objectMapper.convertValue(emailCreateDTO, EmailEntity.class);
@@ -45,22 +48,22 @@ public class EmailService {
         return emailDTO;
     }
 
-    public void enviarEmailComTemplate(EmailDTO emailDTO) throws MessagingException, IOException, TemplateException {
+    public EmailDTO enviarEmailComTemplate(EmailDTO emailDTO) throws MessagingException, IOException, TemplateException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        helper.setFrom(remetente);
         helper.setTo(emailDTO.getEmailDestinatario().split(","));
         helper.setSubject(emailDTO.getAssunto());
-
         Template template = configuration.getTemplate("email-template.ftl");
         Map<String, Object> dados = new HashMap<>();
+        dados.put("id", emailDTO.getRetrospectivaDTO().getIdRetrospectiva());
+        dados.put("titulo", emailDTO.getRetrospectivaDTO().getTituloRetrospectiva());
         dados.put("email", remetente);
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-
         helper.setText(html, true);
-
         emailSender.send(mimeMessage);
+        return emailDTO;
     }
+
 }

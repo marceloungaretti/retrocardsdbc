@@ -7,4 +7,6 @@ import lombok.Data;
 public class EmailDTO extends EmailCreateDTO {
     @ApiModelProperty(value = "ID do email")
     private  Integer idEmail;
+
+    private  RetrospectivaDTO retrospectivaDTO;
 }
