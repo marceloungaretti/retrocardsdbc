@@ -57,9 +57,7 @@ public class EmailService {
 
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-
-
-
+        helper.setFrom(remetente);
         helper.setTo(emailDTO.getEmailDestinatario().split(","));
         helper.setSubject(emailDTO.getAssunto());
         Template template = configuration.getTemplate("email-template.ftl");
