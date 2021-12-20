@@ -87,6 +87,7 @@ public class KudoCardService {
         List<KudoCardDTO> listaDTO = new ArrayList<>();
         for (KudoCardEntity card : listaUser){
             KudoCardDTO dto = objectMapper.convertValue(card, KudoCardDTO.class);
+            dto.setKudoBoxDTO(objectMapper.convertValue(card.getKudoBox(), KudoBoxDTO.class));
             listaDTO.add(dto);
         }
         return listaDTO;
