@@ -93,7 +93,7 @@ public class RetrospectivaController {
             @ApiResponse(code = 500, message = "Foi gerada um exceção.")
     })
     @GetMapping("/find-retro-mais-recente")
-    public List<RetrospectivaDTO> findRetroMaisRecente() throws RegraDeNegocioException {
+    public RetrospectivaDTO findRetroMaisRecente() throws RegraDeNegocioException {
         return retrospectivaService.getRetroMaisRecente();
     }
 }

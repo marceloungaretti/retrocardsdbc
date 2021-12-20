@@ -24,8 +24,8 @@ public class EmailController {
     private final EmailService emailService;
 
     @PostMapping
-    public EmailDTO create(@RequestBody EmailCreateDTO emailCreateDTO) throws RegraDeNegocioException, MessagingException, TemplateException, IOException {
-        EmailDTO emailDTO = emailService.create(emailCreateDTO);
+    public EmailDTO create(@RequestBody EmailCreateDTO emailCreateDTO, Integer idRetrospectiva) throws RegraDeNegocioException, MessagingException, TemplateException, IOException {
+        EmailDTO emailDTO = emailService.create(emailCreateDTO, idRetrospectiva);
         return emailDTO;
     }
 

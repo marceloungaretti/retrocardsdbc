@@ -27,6 +27,7 @@ import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 @Service
@@ -40,10 +41,13 @@ public class EmailService {
     private final Configuration configuration;
     private final RetrospectivaRepository retrospectivaRepository;
 
-    public EmailDTO create(EmailCreateDTO emailCreateDTO) throws RegraDeNegocioException, MessagingException, TemplateException, IOException {
+    public EmailDTO create(EmailCreateDTO emailCreateDTO, Integer idRetrospectiva) throws RegraDeNegocioException, MessagingException, TemplateException, IOException {
         EmailEntity entity = objectMapper.convertValue(emailCreateDTO, EmailEntity.class);
         EmailEntity emailCriar = emailRepository.save(entity);
         EmailDTO emailDTO = objectMapper.convertValue(emailCriar, EmailDTO.class);
+        Optional<RetrospectivaEntity> retrospectivaEntity = retrospectivaRepository.findById(idRetrospectiva);
+        RetrospectivaDTO retrospectivaDTO = objectMapper.convertValue(retrospectivaEntity, RetrospectivaDTO.class);
+        emailDTO.setRetrospectivaDTO(retrospectivaDTO);
         enviarEmailComTemplate(emailDTO);
         return emailDTO;
     }
@@ -52,6 +56,9 @@ public class EmailService {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+
+
+
 
         helper.setTo(emailDTO.getEmailDestinatario().split(","));
         helper.setSubject(emailDTO.getAssunto());
