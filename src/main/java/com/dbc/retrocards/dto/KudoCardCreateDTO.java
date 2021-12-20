@@ -32,4 +32,7 @@ public class KudoCardCreateDTO {
     @ApiModelProperty(value = "Usuário que recebeu")
     private String para;
 
+    @ApiModelProperty(value = "Id do criador")
+    private Integer idCriador;
+
 }
