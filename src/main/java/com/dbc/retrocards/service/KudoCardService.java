@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,6 +74,23 @@ public class KudoCardService {
         } else {
             throw new RegraDeNegocioException("Você não é o criador deste kudo card");
         }
+    }
+
+    public List<KudoCardDTO> listarPorCriador() {
+        List<KudoCardEntity> listaTodos = kudoCardRepository.findAll();
+        List<KudoCardEntity> listaUser = new ArrayList<>();
+        for(KudoCardEntity card : listaTodos) {
+            if(card.getIdCriador().equals(usuarioService.retrieveUser().getIdUsuario())){
+                listaUser.add(card);
+            }
+        }
+        List<KudoCardDTO> listaDTO = new ArrayList<>();
+        for (KudoCardEntity card : listaUser){
+            KudoCardDTO dto = objectMapper.convertValue(card, KudoCardDTO.class);
+            dto.setKudoBoxDTO(objectMapper.convertValue(card.getKudoBox(), KudoBoxDTO.class));
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 
     public List<ListarKudoCardDTO> listar() {
