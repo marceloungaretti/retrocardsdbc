@@ -19,11 +19,12 @@ public class EmailCreateDTO {
     private String assunto;
 
     @NotNull
-    @ApiModelProperty(value = "emaisl do destinatario")
+    @ApiModelProperty(value = "emails do destinatario")
     private String emailDestinatario;
 
     @NotNull
     @ApiModelProperty(value = "data de envio do email")
     private LocalDate dataEnvio;
+
 }
 

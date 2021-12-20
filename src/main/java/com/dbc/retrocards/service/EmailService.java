@@ -39,7 +39,7 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String remetente;
     private final Configuration configuration;
-    private final RetrospectivaRepository retrospectivaRepository;
+    private  final  RetrospectivaRepository retrospectivaRepository;
 
     public EmailDTO create(EmailCreateDTO emailCreateDTO, Integer idRetrospectiva) throws RegraDeNegocioException, MessagingException, TemplateException, IOException {
         EmailEntity entity = objectMapper.convertValue(emailCreateDTO, EmailEntity.class);
