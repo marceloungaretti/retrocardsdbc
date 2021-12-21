@@ -50,7 +50,7 @@
             <div style="padding: 20px;">
 
                 <h1 style="color: #98519b">Olá   </h1>
-              <h5><i> <b> <p style="color: #000000;"> A Retrospectiva ${id}  com ${titulo} foi concluída! Veja os itens apontados pelo time:<br> O que funcionou bem?.<br>O que pode ser melhorado?<br>O que faremos no próximo sprint para melhorar?</b> </i> </p></h5><br>
+              <h5><i> <b> <p style="color: #000000;"> A Retrospectiva  de id: ${id}  com titulo: ${titulo} foi concluída! Veja os itens apontados pelo time:<br> O que funcionou bem?.<br>O que pode ser melhorado?<br>O que faremos no próximo sprint para melhorar?</b> </i> </p></h5><br>
 
 
 

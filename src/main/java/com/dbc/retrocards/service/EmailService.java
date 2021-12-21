@@ -39,7 +39,7 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String remetente;
     private final Configuration configuration;
-    private final RetrospectivaRepository retrospectivaRepository;
+    private  final  RetrospectivaRepository retrospectivaRepository;
 
     public EmailDTO create(EmailCreateDTO emailCreateDTO, Integer idRetrospectiva) throws RegraDeNegocioException, MessagingException, TemplateException, IOException {
         EmailEntity entity = objectMapper.convertValue(emailCreateDTO, EmailEntity.class);
@@ -57,9 +57,7 @@ public class EmailService {
 
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-
-
-
+        helper.setFrom(remetente);
         helper.setTo(emailDTO.getEmailDestinatario().split(","));
         helper.setSubject(emailDTO.getAssunto());
         Template template = configuration.getTemplate("email-template.ftl");
