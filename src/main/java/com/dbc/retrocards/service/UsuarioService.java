@@ -26,7 +26,6 @@ public class UsuarioService {
     private final GrupoRepository grupoRepository;
 
 
-
     public UsuarioDTO create(UsuarioCreateDTO usuarioCreateDTO) {
         UsuarioEntity entity = objectMapper.convertValue(usuarioCreateDTO, UsuarioEntity.class);
         entity.setNome(usuarioCreateDTO.getNome());
@@ -44,25 +43,24 @@ public class UsuarioService {
         UsuarioEntity save = usuarioRepository.save(entity);
         UsuarioDTO usuarioDTO = objectMapper.convertValue(save, UsuarioDTO.class);
 
-      return new UsuarioDTO(save.getIdUsuario(), save.getNome(),save.getCpf(),save.getDataNascimento(), save.getEmail(), save.getLogin(), save.getGrupos().stream().map(grupoEntity ->  objectMapper.convertValue(grupoEntity, GrupoDTO.class)).collect(Collectors.toList()));
+        return new UsuarioDTO(save.getIdUsuario(), save.getNome(), save.getCpf(), save.getDataNascimento(), save.getEmail(), save.getLogin(), save.getGrupos().stream().map(grupoEntity -> objectMapper.convertValue(grupoEntity, GrupoDTO.class)).collect(Collectors.toList()));
 
     }
 
 
-
     //Listar
-    public List<UsuarioDTO> list () {
+    public List<UsuarioDTO> list() {
         return usuarioRepository.findAll().stream()
-                .map(x-> {
-                   UsuarioDTO usuarioDTO = objectMapper.convertValue(x, UsuarioDTO.class);
-                   usuarioDTO.setGrupos(x.getGrupos().stream().map(grupoEntity -> objectMapper.convertValue(grupoEntity, GrupoDTO.class)).collect(Collectors.toList()));
-                   return usuarioDTO;
+                .map(x -> {
+                    UsuarioDTO usuarioDTO = objectMapper.convertValue(x, UsuarioDTO.class);
+                    usuarioDTO.setGrupos(x.getGrupos().stream().map(grupoEntity -> objectMapper.convertValue(grupoEntity, GrupoDTO.class)).collect(Collectors.toList()));
+                    return usuarioDTO;
                 })
                 .collect(Collectors.toList());
     }
 
     //Atualizar
-    public UsuarioDTO update (Integer id, UsuarioCreateDTO usuarioCreateDTO) throws RegraDeNegocioException {
+    public UsuarioDTO update(Integer id, UsuarioCreateDTO usuarioCreateDTO) throws RegraDeNegocioException {
         findById(id);
         List<GrupoEntity> grupoEntityList = grupoRepository.findAllById(usuarioCreateDTO.getGrupos());
         UsuarioEntity usuarioEntity = objectMapper.convertValue(usuarioCreateDTO, UsuarioEntity.class);
@@ -77,32 +75,31 @@ public class UsuarioService {
     }
 
     //Deletar
-    public void delete (Integer id) throws RegraDeNegocioException {
+    public void delete(Integer id) throws RegraDeNegocioException {
         UsuarioEntity usuarioEntity = findById(id);
         usuarioRepository.delete(usuarioEntity);
     }
 
     //FindById
     public UsuarioEntity findById(Integer id) throws RegraDeNegocioException {
-    UsuarioEntity entity = usuarioRepository.findById(id)
-            .orElseThrow(() -> new RegraDeNegocioException("Usuario não encontrado"));
-    return entity;
-}
+        UsuarioEntity entity = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RegraDeNegocioException("Usuario não encontrado"));
+        return entity;
+    }
 
     //GetPorId
     public UsuarioDTO getPorId(Integer id) throws RegraDeNegocioException {
         UsuarioEntity usuarioEntity = findById(id);
-
-        UsuarioDTO usuarioDTO= objectMapper.convertValue(usuarioEntity, UsuarioDTO.class);
+        UsuarioDTO usuarioDTO = objectMapper.convertValue(usuarioEntity, UsuarioDTO.class);
         usuarioDTO.setGrupos(usuarioEntity.getGrupos().stream().map(grupoEntity -> objectMapper.convertValue(grupoEntity, GrupoDTO.class)).collect(Collectors.toList()));
-
         return usuarioDTO;
     }
+
     public Optional<UsuarioEntity> findByLoginAndSenha(String login, String senha) {
         return usuarioRepository.findByLoginAndSenha(login, senha);
     }
 
-    public Optional<UsuarioEntity> findByLogin(String login){
+    public Optional<UsuarioEntity> findByLogin(String login) {
         return usuarioRepository.findByLogin(login);
     }
 
@@ -110,5 +107,13 @@ public class UsuarioService {
         int idUsuario = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         Optional<UsuarioEntity> usuario = usuarioRepository.findById(idUsuario);
         return objectMapper.convertValue(usuario, UsuarioDTO.class);
+    }
+
+    public List<UsuarioDTO> listarUsuarioPorGrupo(Integer idGrupo) {
+        return usuarioRepository.listarUsuariosPorGrupo(idGrupo).stream().map(x -> {
+                    UsuarioDTO usuarioDTO = objectMapper.convertValue(x, UsuarioDTO.class);
+                    return usuarioDTO;
+                })
+                .collect(Collectors.toList());
     }
 }
