@@ -99,7 +99,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/listar-por-grupo")
-    public List<UsuarioDTO> listarUsuarioPorGrupo(Integer idGrupo){
-        return usuarioService.listarUsuarioPorGrupo(idGrupo);
+    public List<UsuarioDTO> listarUsuarioPorGrupo(){
+        return usuarioService.listarUsuarioPorGrupo();
     }
 }

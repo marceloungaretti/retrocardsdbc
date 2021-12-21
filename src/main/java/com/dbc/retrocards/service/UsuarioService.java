@@ -109,9 +109,12 @@ public class UsuarioService {
         return objectMapper.convertValue(usuario, UsuarioDTO.class);
     }
 
-    public List<UsuarioDTO> listarUsuarioPorGrupo(Integer idGrupo) {
-        return usuarioRepository.listarUsuariosPorGrupo(idGrupo).stream().map(x -> {
+    public List<UsuarioDTO> listarUsuarioPorGrupo() {
+        int idUsuario = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+        Optional<UsuarioEntity> usuario = usuarioRepository.findById(idUsuario);
+        return usuarioRepository.listarUsuariosPorGrupo(idUsuario).stream().map(x -> {
                     UsuarioDTO usuarioDTO = objectMapper.convertValue(x, UsuarioDTO.class);
+                    usuarioDTO.setGrupos(x.getGrupos().stream().map(grupoEntity -> objectMapper.convertValue(grupoEntity, GrupoDTO.class)).collect(Collectors.toList()));
                     return usuarioDTO;
                 })
                 .collect(Collectors.toList());

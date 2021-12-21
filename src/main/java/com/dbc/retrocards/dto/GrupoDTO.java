@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,6 +20,8 @@ public class GrupoDTO {
     private String nome;
 
     private String descricao;
+
+    private List<UsuarioDTO> usuarioDTO;
 
 
 }
