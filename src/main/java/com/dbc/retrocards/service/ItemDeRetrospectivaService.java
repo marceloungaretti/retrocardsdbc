@@ -76,15 +76,11 @@ public class ItemDeRetrospectivaService {
 
     public void delete(Integer id) throws RegraDeNegocioException {
         ItemDeRetrospectivaEntity entity = findById(id);
-        if (entity.getIdCriador().equals(usuarioService.retrieveUser().getIdUsuario())) {
             if (entity.getRetrospectivaEntity().getStatusRetrospectivaEntity() == StatusRetrospectivaEntity.EM_ANDAMENTO) {
                 itemDeRetrospectivaRepository.delete(entity);
             } else {
                 throw new RegraDeNegocioException("Não é possivel deletar. Status Incorreto.");
             }
-        } else {
-            throw new RegraDeNegocioException("Você não é o criador deste item");
-        }
     }
 
 }
