@@ -7,6 +7,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class RetrospectivaCreateDTO {
     @NotBlank
     @ApiModelProperty(value = "Título da Retrospectiva")
     private  String tituloRetrospectiva;
+    @Past
     @ApiModelProperty(value = "Data de criação do reunião")
     private LocalDate dataReuniao;
     @ApiModelProperty(value = "1 - CRIADO   2 - ANDAMENTO")

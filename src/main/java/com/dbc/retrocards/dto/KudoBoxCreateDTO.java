@@ -8,6 +8,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
 
@@ -19,6 +20,7 @@ public class KudoBoxCreateDTO {
     @ApiModelProperty(value = "Título do KudoBox")
     private String titulo;
 
+    @Past
     @NotNull
     @ApiModelProperty(value = "Data de leitura dos KudoCards(encerramento dos cadastros)")
     private LocalDate dataLeitura;
