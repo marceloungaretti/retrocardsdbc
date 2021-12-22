@@ -31,15 +31,6 @@ public class ItemDeRetrospectivaServiceTest {
     @InjectMocks
     private ItemDeRetrospectivaService itemDeRetrospectivaService;
 
-    @Test
-    public void deveriaRetornarTodosCardsComSucesso() {
-//        when(itemDeRetrospectivaRepository.findAll()).thenReturn(Arrays.asList(
-//                new ItemDeRetrospectivaEntity(1, "a", "Retrospectiva 2021 - 1", "Primeira Retrospectiva", new RetrospectivaEntity()),
-//                new ItemDeRetrospectivaEntity(2, "b", "Retrospectiva 2021 - 2", "Segunda Retrospectiva", new RetrospectivaEntity())
-//        ));
-//        List<ItemDeRetrospectivaEntity> lista = itemDeRetrospectivaRepository.findAll();
-//        Assert.assertEquals(2, lista.size());
-    }
 
     @Test(expected = Exception.class)
     public void naoDeveriaSalvarListaDeCardsQueNaoPossuiBox() throws RegraDeNegocioException {

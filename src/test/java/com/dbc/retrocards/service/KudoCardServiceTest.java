@@ -36,29 +36,6 @@ public class KudoCardServiceTest {
     @InjectMocks
     private KudoCardService kudoCardService;
 
-    @Test
-    public void deveriaAtualizarCardComSucesso() throws RegraDeNegocioException {
-//        KudoCardEntity kudoCardEntity = new KudoCardEntity(1,"Card 1","Primeiro Card", LocalDate.now(),"Fulano","Beltrano",new KudoBoxEntity());
-//        when(kudoCardRepository.findById(1)).thenReturn(Optional.of(kudoCardEntity));
-//
-//        KudoCardCreateDTO kudoCardCreateDTO = new KudoCardCreateDTO();
-//        kudoCardCreateDTO.setTitulo("4");
-//
-//        kudoCardEntity.setIdKudoCard(1);
-//        kudoCardService.update(kudoCardRepository.findById(1), kudoCardCreateDTO);
-//        kudoCardEntity.setIdKudoCard(1);
-//        Assert.assertEquals("4", kudoCardEntity.getTitulo());
-    }
-
-//    @Test
-//    public void deveriaRetornarTodosCardsComSucesso() {
-//        when(kudoCardRepository.findAll()).thenReturn(Arrays.asList(
-//                new KudoCardEntity(1,"Card 1","Primeiro Card", LocalDate.now(),"Fulano","Beltrano",new KudoBoxEntity()),
-//                new KudoCardEntity(2, "Card 2", "Segundo Card", LocalDate.now(), "Sicrano", "Fulano", new KudoBoxEntity())
-//        ));
-//        List<KudoCardEntity> lista = kudoCardRepository.findAll();
-//        Assert.assertEquals(2, lista.size());
-//    }
 
     @Test(expected = Exception.class)
     public void naoDeveriaCardQueNaoPossuiBox() throws RegraDeNegocioException {
