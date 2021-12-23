@@ -44,7 +44,7 @@ public class UsuarioEntity implements Serializable, UserDetails {
             inverseJoinColumns = @JoinColumn(name = "id_grupo")
     )
     private List<GrupoEntity> grupos;
-
+//FIXME Limpar
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "usuarioEntity", fetch = FetchType.LAZY)
 //    private List<ReservaEntity> reservas;

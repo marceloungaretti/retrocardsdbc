@@ -2,7 +2,7 @@ package com.dbc.retrocards.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+//FIXME Limpar
 import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.time.LocalDate;

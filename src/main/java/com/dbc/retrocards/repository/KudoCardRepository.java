@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface KudoCardRepository extends JpaRepository<KudoCardEntity, Integer> {
 
+    //FIXME Evitar usar query nativa
     @Query(value ="select * from kudocard k order by  data_criacao asc",nativeQuery = true)
     List<KudoCardEntity> listarKudoCardPorDataAsc ();
 

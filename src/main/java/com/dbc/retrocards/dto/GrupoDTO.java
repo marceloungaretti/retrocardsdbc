@@ -1,6 +1,6 @@
 package com.dbc.retrocards.dto;
 
-
+//FIXME Limpar
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 

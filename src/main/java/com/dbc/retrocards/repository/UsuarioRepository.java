@@ -1,5 +1,5 @@
 package com.dbc.retrocards.repository;
-
+//FIXME Limpar
 import com.dbc.retrocards.entity.SprintEntity;
 import com.dbc.retrocards.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +14,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer>
     Optional<UsuarioEntity> findByLoginAndSenha(String login, String senha);
     Optional<UsuarioEntity> findByLogin(String login);
 
+    //FIXME Evitar usar query nativa
     @Query(value = "select * from usuario u join usuario_grupo ug on (u.id_usuario = ug.id_usuario)  where u.id_usuario = :id",nativeQuery = true)
     List<UsuarioEntity> listarUsuariosPorGrupo (Integer id);
 }

@@ -1,6 +1,6 @@
 package com.dbc.retrocards.dto;
 
-
+//FIXME Limpar
 import com.dbc.retrocards.entity.SprintEntity;
 import com.dbc.retrocards.entity.StatusKudoBoxEntity;
 import io.swagger.annotations.ApiModelProperty;

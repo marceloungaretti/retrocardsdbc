@@ -1,5 +1,5 @@
 package com.dbc.retrocards.dto;
-
+//FIXME Limpar
 import com.dbc.retrocards.entity.SprintEntity;
 import com.dbc.retrocards.entity.StatusRetrospectivaEntity;
 import io.swagger.annotations.ApiModelProperty;

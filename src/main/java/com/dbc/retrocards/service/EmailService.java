@@ -37,7 +37,7 @@ public class EmailService {
     private final EmailRepository emailRepository;
     private final JavaMailSender emailSender;
     @Value("${spring.mail.username}")
-    private String remetente;
+    private String remetente; //FIXME Limpar
     private final Configuration configuration;
     private  final  RetrospectivaRepository retrospectivaRepository;
 

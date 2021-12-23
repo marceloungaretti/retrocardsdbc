@@ -22,6 +22,7 @@ public class RegraEntity implements Serializable, GrantedAuthority {
     private String nome;
 
     @ManyToMany(mappedBy = "regras")
+//FIXME Limpar
     private List<com.dbc.retrocards.entity.GrupoEntity> grupos;
 
     @Override

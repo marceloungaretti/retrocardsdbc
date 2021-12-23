@@ -1,5 +1,5 @@
 package com.dbc.retrocards.repository;
-
+//FIXME Limpar
 import com.dbc.retrocards.entity.ItemDeRetrospectivaEntity;
 import com.dbc.retrocards.entity.RetrospectivaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
  public  interface RetrospectivaRepository extends JpaRepository<RetrospectivaEntity, Integer> {
+
+ //FIXME Evitar usar query nativa
  @Query(value = "SELECT * from retrospectiva WHERE id_sprint = :id order by data desc", nativeQuery = true)
  List<RetrospectivaEntity> findByIdSprint(Integer id);
 

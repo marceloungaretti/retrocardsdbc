@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface SprintRepository  extends JpaRepository<SprintEntity, Integer> {
 
+    //FIXME Evitar usar query nativa
     @Query(value = "select * from sprint s order by  data_conclusao asc",nativeQuery = true)
     List<SprintEntity> listarSprintPorDataConclusaoDesc ();
 }

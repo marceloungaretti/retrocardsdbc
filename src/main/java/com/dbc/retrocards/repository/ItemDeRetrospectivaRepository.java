@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ItemDeRetrospectivaRepository extends JpaRepository<ItemDeRetrospectivaEntity, Integer> {
+    //FIXME Evitar usar query nativa
     @Query(value = "SELECT * from item WHERE id_retrospectiva = :id", nativeQuery = true)
     List<ItemDeRetrospectivaEntity> findByIdRetro(Integer id);
 

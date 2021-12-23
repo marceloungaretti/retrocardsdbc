@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+//FIXME Limpar imports
 import java.time.LocalDate;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class KudoBoxController {
         KudoBoxDTO kudoBoxDTO = kudoBoxService.create(id, kudoBoxCreateDTO);
         return kudoBoxDTO;
     }
-
+//FIXME Ajustar ou remover/limpar
 //    @GetMapping
 //    @ApiOperation(value = "Retorna uma lista de Kudo Boxes")
 //    @ApiResponses(value = {

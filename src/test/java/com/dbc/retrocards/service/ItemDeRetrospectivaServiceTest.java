@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
+//FIXME Limpar
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +22,8 @@ import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class ItemDeRetrospectivaServiceTest {
+
+    //FIXME Criar mais testes para abranger todos services
 
     @Mock
     private ItemDeRetrospectivaRepository itemDeRetrospectivaRepository;

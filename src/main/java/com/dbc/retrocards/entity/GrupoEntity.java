@@ -33,6 +33,7 @@ public class GrupoEntity implements Serializable {
             joinColumns = @JoinColumn(name = "id_grupo"),
             inverseJoinColumns = @JoinColumn(name = "id_regra")
     )
+    //FIXME Pode deixar sem o caminho, já está no pacote
     private List<com.dbc.retrocards.entity.RegraEntity> regras;
 
 }

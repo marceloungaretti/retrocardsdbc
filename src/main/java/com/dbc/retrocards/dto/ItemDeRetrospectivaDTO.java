@@ -1,5 +1,5 @@
 package com.dbc.retrocards.dto;
-
+//FIXME Limpar
 import com.dbc.retrocards.repository.RetrospectivaRepository;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
